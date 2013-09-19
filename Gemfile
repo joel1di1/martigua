@@ -26,6 +26,10 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'puma'
 
+gem 'ransack'
+gem 'activeadmin', github: 'gregbell/active_admin', branch: 'rails4'
+
+
 group :production do
   gem 'pg'
 end
