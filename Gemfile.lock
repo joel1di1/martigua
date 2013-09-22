@@ -81,6 +81,8 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
+    faker (1.2.0)
+      i18n (~> 0.5)
     formtastic (2.3.0.rc2)
       actionpack (>= 3.0)
     haml (4.0.3)
@@ -88,6 +90,7 @@ GEM
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
+    hashie (2.0.5)
     hike (1.2.3)
     i18n (0.6.5)
     inherited_resources (1.4.1)
@@ -112,6 +115,9 @@ GEM
     mime-types (1.25)
     minitest (4.7.5)
     multi_json (1.8.0)
+    omniauth (1.1.4)
+      hashie (>= 1.2, < 3)
+      rack
     orm_adapter (0.4.0)
     pg (0.17.0)
     polyamorous (0.6.4)
@@ -205,9 +211,11 @@ DEPENDENCIES
   debugger
   devise
   factory_girl_rails
+  faker
   haml
   jbuilder (~> 1.2)
   jquery-rails
+  omniauth
   pg
   puma
   rails (= 4.0.0)

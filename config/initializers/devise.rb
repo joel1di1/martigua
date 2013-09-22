@@ -4,7 +4,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  config.secret_key = '7a0df3f36bd97b4b933bbf1d36a1f77eaae4938148867deb7ee4bcc62dcdbc0e36b94a7e3475d0d400fd091a2e21f439145bcc22981f1715fffba33bbe411517'
+  config.secret_key = 'a3fb9c39aaaf381c865ea9aee087628afbc891f8a4dcf8c88fc51e67ea1f8e74aee7d4b2db7b211ccecdd3eb2c5defdbdb08d20ea14feacd52617fa13aab2ecd'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -98,7 +98,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = '185796918525939ef137fc6917163092fdfdf19b098041e2f6f22b01bf2c2da23b791b240a8c915f45d27e3374715167f762a8402c9366e73ccd3a76cd23845e'
+  # config.pepper = 'f880b4e0d8d610090783e2ec7098064814cd81e5e198df83edf1e9ad851a38707893d4526204ccd9805b168c8dadd133514575e31a094f6ecdf97bb7fcd8fe2a'
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -138,12 +138,12 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length. Default is 8..128.
-  config.password_length = 8..128
+  config.password_length = 0..128
 
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
   # to give user feedback and not to assert the e-mail validity.
-  # config.email_regexp = /\A[^@]+@[^@]+\z/
+  config.email_regexp = /\A[^@]+@[^@]+\z/
 
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
@@ -198,7 +198,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :token_authenticatable
   # Defines name of the authentication token params key
-  # config.token_authentication_key = :auth_token
+  config.token_authentication_key = :auth_token
 
   # ==> Scopes configuration
   # Turn scoped views on. Before rendering "sessions/new", it will first check for

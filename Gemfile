@@ -33,6 +33,7 @@ gem 'activeadmin', github: 'gregbell/active_admin', branch: 'rails4'
 gem 'simple_form'
 gem 'haml'
 gem 'devise'
+gem 'omniauth'
 
 group :production do
   gem 'pg'
@@ -47,12 +48,14 @@ end
 group :development, :test do
   gem 'debugger'
   gem 'sqlite3'
+  gem 'factory_girl_rails'
 end
 
 group :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
-  gem 'factory_girl_rails'
+  gem 'faker'
 end
+
 
