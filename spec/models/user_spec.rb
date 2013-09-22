@@ -2,8 +2,7 @@ require "spec_helper"
 
 describe User do
   it { should validate_presence_of(:email) }
-  it { should validate_presence_of(:first_name) }
-  # it { should validate_presence_of(:authentication_token) }
+  # it { should validate_presence_of(:authentication_token) }  // does not work ???
 
   describe '#create' do
     context 'with authentication_token nil' do
