@@ -32,6 +32,7 @@ gem 'ransack'
 gem 'activeadmin', github: 'gregbell/active_admin', branch: 'rails4'
 gem 'simple_form'
 gem 'haml'
+gem 'devise'
 
 group :production do
   gem 'pg'

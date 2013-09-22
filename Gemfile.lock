@@ -198,6 +198,7 @@ DEPENDENCIES
   activeadmin!
   coffee-rails (~> 4.0.0)
   debugger
+  devise
   haml
   jbuilder (~> 1.2)
   jquery-rails
