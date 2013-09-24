@@ -10,10 +10,9 @@ describe User do
       its(:authentication_token) { should_not be_nil }
     end
 
-    describe 'sends confirmation email' do 
+    describe 'sends change password email' do 
       subject { lambda { create :user } }
       it { should change(ActionMailer::Base.deliveries, :count).by(1) }
     end
   end
-
 end

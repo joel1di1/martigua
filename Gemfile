@@ -34,6 +34,7 @@ gem 'simple_form'
 gem 'haml'
 gem 'devise'
 gem 'omniauth'
+gem 'nilify_blanks'
 
 group :production do
   gem 'pg'
@@ -56,6 +57,7 @@ group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'faker'
+  gem 'capybara'
 end
 
 
