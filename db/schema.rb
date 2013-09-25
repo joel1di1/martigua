@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130922212614) do
+ActiveRecord::Schema.define(version: 20130924231502) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -46,12 +46,45 @@ ActiveRecord::Schema.define(version: 20130922212614) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 
+  create_table "championships", force: true do |t|
+    t.string   "name"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "clubs", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "commitments", force: true do |t|
+    t.integer  "team_id"
+    t.integer  "championship_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "commitments", ["championship_id"], name: "index_commitments_on_championship_id"
+  add_index "commitments", ["team_id"], name: "index_commitments_on_team_id"
+
   create_table "locations", force: true do |t|
     t.string   "name"
     t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "teams", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "club_id"
+  end
+
+  add_index "teams", ["club_id"], name: "index_teams_on_club_id"
 
   create_table "trainings", force: true do |t|
     t.datetime "date"

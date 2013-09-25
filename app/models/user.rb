@@ -26,6 +26,22 @@ class User < ActiveRecord::Base
     self.send_reset_password_instructions
   end
 
+  def full_name
+    if nickname
+      nickname
+    elsif first_name && last_name
+      "#{first_name} #{last_name}"
+    elsif first_name
+      first_name
+    else
+      email
+    end
+  end
+
+  def to_param
+    "#{id} #{full_name}".parameterize
+  end
+
   protected 
 
     def ensure_authentication_token

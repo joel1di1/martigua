@@ -51,6 +51,10 @@ group :development, :test do
   gem 'debugger'
   gem 'sqlite3'
   gem 'factory_girl_rails'
+  gem 'spork-rails'
+  gem 'guard-rails'
+  gem 'guard-rspec'
+  gem 'guard-spork'
 end
 
 group :test do

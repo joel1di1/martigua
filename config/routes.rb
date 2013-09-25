@@ -1,6 +1,6 @@
 Martigua::Application.routes.draw do
   devise_for :users
-  resources :users, only: [:index]
+  resources :users, only: [:index, :show, :edit, :update]
 
   resources :locations
 
