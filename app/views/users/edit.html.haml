@@ -1,0 +1,13 @@
+- input_options = { wrapper_html: { class: 'form-group' }, label_html: { class: 'col-lg-2 control-label'}, input_html: {class: 'form-control'} }
+
+%h1= @user.full_name
+= simple_form_for(@user, class: 'form-horizontal') do |f|
+  = f.error_notification
+  = f.input :email, input_options
+  = f.input :first_name, input_options
+  = f.input :last_name, input_options
+  = f.input :nickname, input_options
+  = f.input :phone, input_options
+  .container.pull-right
+    = link_to 'Annuler', @user
+    = f.button :submit, class: 'btn btn-default '
