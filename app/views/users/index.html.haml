@@ -21,6 +21,6 @@
           %td= user.nickname
           %td= user.email
           %td= user.phone
-          %td= user.cotisation
-          %td= user.certificat_medical
+          %td= t(user.cotisation.to_s)
+          %td= t(user.certificat_medical.to_s)
           %td= link_to 'Show', user

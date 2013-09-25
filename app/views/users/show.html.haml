@@ -1,24 +1,20 @@
-%p#notice= notice
-%p
-  %strong First name:
-  = @user.first_name
-%p
-  %strong Last name:
-  = @user.last_name
-%p
-  %strong Nickname:
-  = @user.nickname
-%p
-  %strong Email:
-  = @user.email
-%p
-  %strong Phone:
-  = @user.phone
-%p
-  %strong Cotisation:
-  = @user.cotisation
-%p
-  %strong Certificat medical:
-  = @user.certificat_medical
-- if current_user == @user
-  = link_to 'Modifier', edit_user_path(@user)
+.container
+  .panel.panel-default
+    .panel-body
+      %h2= "#{@user.first_name} #{@user.last_name}"
+      %h3= @user.nickname
+
+      %address
+        = mail_to @user.email
+        %br
+        Tel:
+        = @user.phone
+
+  .panel.panel-default
+    .panel-body
+      %ul
+        %li Certificat médical : #{t(@user.certificat_medical.to_s)}  
+        %li Cotisation payée : #{t(@user.cotisation.to_s)}
+
+  - if current_user == @user
+    = link_to 'Modifier', edit_user_path(@user)

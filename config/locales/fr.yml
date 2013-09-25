@@ -1,0 +1,10 @@
+fr:
+  'true': Oui
+  'false': Non
+  martigua: Martigua
+  date:
+    formats:
+      long: "%d-%m-%Y"
+  time:
+    formats:
+      long: "%d-%m-%Y %H:%M:%S"

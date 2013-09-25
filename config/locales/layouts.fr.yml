@@ -1,0 +1,8 @@
+fr:
+  true: Oui
+  false: Non
+  layouts:
+    home: Accueil
+    application:
+      users: Joueurs
+      
