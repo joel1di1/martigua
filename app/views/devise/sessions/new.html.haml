@@ -1,0 +1,15 @@
+%h2= t('.welcome')
+
+#sign_in_box.panel.panel-default
+  .panel-heading
+    .panel-title
+      %h4= t('.please_sign_in')
+  .panel-body
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name), wrapper: :bs_horizontal, html: { class: 'form-horizontal'} ) do |f|
+      = f.input :email, autofocus: true, required: false, label_html:{class: 'col-lg-2 '}
+      = f.input :password, :required => false, label_html:{class: 'col-lg-2 '}
+      = f.input :remember_me, as: :boolean, wrapper: :inline_checkbox
+      .form-actions
+        = f.button :submit, "Sign in", class: 'btn-primary'
+    = render "devise/shared/links"
+

@@ -30,7 +30,7 @@ gem 'puma'
 
 gem 'ransack'
 gem 'activeadmin', github: 'gregbell/active_admin', branch: 'rails4'
-gem 'simple_form'
+gem 'simple_form', '~> 3.0.0'
 gem 'haml'
 gem 'devise'
 gem 'omniauth'
