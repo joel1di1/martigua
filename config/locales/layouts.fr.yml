@@ -1,6 +1,6 @@
 fr:
   layouts:
     home: Accueil
-    application:
+    header:
       users: Joueurs
       
