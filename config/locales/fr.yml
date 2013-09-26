@@ -3,6 +3,10 @@ fr:
   'false': Non
   martigua: Martigua
   date:
+    order:
+      - :day
+      - :month
+      - :year
     formats:
       long: "%d-%m-%Y"
   time:

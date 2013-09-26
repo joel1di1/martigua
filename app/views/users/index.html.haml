@@ -19,8 +19,8 @@
           %td= user.first_name
           %td= user.last_name
           %td= user.nickname
-          %td= user.email
-          %td= user.phone
+          %td= mail_to user.email
+          %td= link_to user.phone, "tel:#{user.phone}" if user.phone
           %td= t(user.cotisation.to_s)
           %td= t(user.certificat_medical.to_s)
           %td= link_to 'Show', user

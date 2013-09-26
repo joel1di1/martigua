@@ -1,4 +1,6 @@
 Martigua::Application.routes.draw do
+  resources :matches
+
   devise_for :users
   resources :users, only: [:index, :show, :edit, :update]
 

@@ -1,0 +1,19 @@
+<%= simple_form_for(@match) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :championship %>
+    <%= f.input :local_team_id %>
+    <%= f.input :visitor_team_id %>
+    <%= f.input :starting_time %>
+    <%= f.input :between_day1 %>
+    <%= f.input :between_day2 %>
+    <%= f.input :local_score %>
+    <%= f.input :visitor_score %>
+    <%= f.input :official_url %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

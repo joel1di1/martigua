@@ -1,0 +1,43 @@
+<h1>Listing matches</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Championship</th>
+      <th>Local team</th>
+      <th>Visitor team</th>
+      <th>Starting time</th>
+      <th>Between day1</th>
+      <th>Between day2</th>
+      <th>Local score</th>
+      <th>Visitor score</th>
+      <th>Official url</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @matches.each do |match| %>
+      <tr>
+        <td><%= match.championship %></td>
+        <td><%= match.local_team_id %></td>
+        <td><%= match.visitor_team_id %></td>
+        <td><%= match.starting_time %></td>
+        <td><%= match.between_day1 %></td>
+        <td><%= match.between_day2 %></td>
+        <td><%= match.local_score %></td>
+        <td><%= match.visitor_score %></td>
+        <td><%= match.official_url %></td>
+        <td><%= link_to 'Show', match %></td>
+        <td><%= link_to 'Edit', edit_match_path(match) %></td>
+        <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Match', new_match_path %>
