@@ -13,8 +13,6 @@
       <th>Visitor score</th>
       <th>Official url</th>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -31,13 +29,8 @@
         <td><%= match.visitor_score %></td>
         <td><%= match.official_url %></td>
         <td><%= link_to 'Show', match %></td>
-        <td><%= link_to 'Edit', edit_match_path(match) %></td>
-        <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
-
-<%= link_to 'New Match', new_match_path %>
