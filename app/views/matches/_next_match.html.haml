@@ -1,0 +1,11 @@
+%tr
+  - if next_match
+    %td.text-center= next_match.local_team.name
+    %td.text-center= next_match.visitor_team.name
+    %td.text-center= format_schedule next_match
+    %td.text-center
+      - if next_match.location
+        = link_to "http://maps.google.com/?q=#{next_match.location.address.squish}", {rel: "nofollow", target: '_blank'}do
+          %span{title: next_match.location.address}= next_match.location.name
+      - else
+        %em.text-muted Lieu non défini

@@ -6,6 +6,10 @@ class Team < ActiveRecord::Base
     matches.finished.order('starting_time DESC').first
   end
 
+  def next_match
+    matches.to_come.sort{|a,b| (a.starting_time || a.between_day1) <=> (b.starting_time || b.between_day1)}.first
+  end
+
   def matches
     Match.of(self)
   end

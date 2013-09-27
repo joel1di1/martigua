@@ -17,6 +17,7 @@ ActiveAdmin.register Match do
       f.input :championship
       f.input :local_team
       f.input :visitor_team
+      f.input :location
       f.input :starting_time, as: :datetime
       f.input :between_day1, as: :date
       f.input :between_day2, as: :date

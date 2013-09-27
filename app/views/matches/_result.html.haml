@@ -1,9 +1,9 @@
 - local_class = result.local_score > result.visitor_score ? 'winner' : nil
 - visitor_class = result.local_score < result.visitor_score ? 'winner' : nil
 %tr
-  %td{class: local_class}= result.local_team.name
-  %td
+  %td.text-center{class: local_class}= result.local_team.name
+  %td.text-center
     %span{class: local_class}= result.local_score
     \-
     %span{class: visitor_class}= result.visitor_score
-  %td{class: visitor_class}= result.visitor_team.name
+  %td.text-center{class: visitor_class}= result.visitor_team.name

@@ -8,6 +8,7 @@ class HomeController < ApplicationController
     @teams = @club.teams.order('name ASC')
 
     @last_matches = @teams.map(&:last_match)
+    @next_matches = @teams.map(&:next_match)
   end
 
 end

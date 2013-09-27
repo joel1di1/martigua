@@ -28,6 +28,30 @@ describe Team do
     end
   end
 
+  describe '#next_match' do
+    subject { team.next_match }
+
+    context 'with no match' do
+      it { should be_nil }
+    end
+
+    context 'with a previous match' do
+      let!(:futur_match) { create :match, :finished, local_team: team }
+
+      it { should be_nil }
+
+      context 'with two futurs match' do
+        let!(:finished_match_1) { create :match, :futur, local_team: team, starting_time: 8.days.from_now }
+        let!(:finished_match_2) { create :match, :futur, local_team: team, starting_time: 3.days.from_now }
+
+        it { should_not be_nil }
+        it { should eq finished_match_2 }
+      end
+    end
+  end
+
+
+
   describe '#matches' do
 
     subject { team.matches }
