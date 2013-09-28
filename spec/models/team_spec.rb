@@ -2,6 +2,7 @@ require "spec_helper"
 
 describe Team do
   it { should belong_to(:club) }
+  it { should have_many(:matches) }
   it { should validate_presence_of(:name) }
 
   let(:team) { create :team }

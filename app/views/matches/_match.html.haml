@@ -1,0 +1,6 @@
+%tr
+  %td= match.local_team.name
+  %td= match.visitor_team.name
+  %td= format_schedule match
+  %td= render partial: 'locations/gmaps_link', locals: {location: match.location}
+  %td Score final

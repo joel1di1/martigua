@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
+  helper_method :current_club
+
   protected
 
     def layout_by_resource
@@ -14,4 +16,9 @@ class ApplicationController < ActionController::Base
         'application'
       end
     end 
+
+    def current_club
+      @current_club ||= Club.find_by_name('Martigua')
+    end
+
 end
