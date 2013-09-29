@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, 
          :trackable, :validatable
 
+  has_many :availabilities, dependent: :delete_all
+
   validates_presence_of :email, :authentication_token
 
   before_validation :ensure_authentication_token
@@ -40,6 +42,31 @@ class User < ActiveRecord::Base
 
   def to_param
     "#{id} #{full_name}".parameterize
+  end
+
+  def available_for?(match)
+    availability_for(match).try(:availability)
+  end
+
+  def availability_for(match)
+    availabilities.where(match_id: match.id).first
+  end
+
+  def to_s
+    full_name
+  end
+
+  def change_all_availabilities(match_ids, available)
+    Availability.transaction do 
+      Availability.where(user: self, match_id: match_ids).delete_all
+      Match.where(id: match_ids).map do |match|
+        Availability.create! user: self, match: match, availability: available
+      end
+    end
+  end
+
+  def set_availability_for?(matches)
+    matches.count == availabilities.where(match_id: matches.map(&:id)).count
   end
 
   protected 

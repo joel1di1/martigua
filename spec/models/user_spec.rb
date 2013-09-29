@@ -62,4 +62,58 @@ describe User do
       end
     end
   end
+
+
+  describe '#available_for?' do
+    let(:match) { create :match }
+
+    subject { user.available_for? match}
+
+    context 'when user has not indicated his availability' do
+      it { should be_nil }
+    end
+
+    context 'when user has indicated his availability' do
+      let!(:user_availability) { create :availability, user: user, match: match, availability: availability }
+
+      context 'as available' do
+        let(:availability) { true }
+
+        it { should_not be_nil }
+        it { should be_true }
+      end
+      context 'as not available' do
+        let(:availability) { false }
+
+        it { should_not be_nil }
+        it { should be_false }
+      end
+    end
+  end
+
+  describe '#change_all_availabilities' do
+    let(:match_1) { create :match, :futur}
+    let(:match_2) { create :match, :futur}
+    let(:match_3) { create :match, :futur}
+    let(:matches) { [match_1, match_2, match_3] }
+    let(:match_ids) { matches.map(&:id) }
+    let(:available) { [true, false].sample }
+
+    subject do
+      user.change_all_availabilities(match_ids, available)
+      [user.available_for?(match_1), user.available_for?(match_2), user.available_for?(match_3)].uniq
+    end
+
+    context 'with no previous availability' do
+      it { should eq [available] }
+    end
+    context 'with previous availabilities' do
+      let!(:availability_1) { create :availability, user: user, match: match_1 }
+      let!(:availability_2) { create :availability, user: user, match: match_2, availability: true }
+      let!(:availability_3) { create :availability, user: user, match: match_3, availability: false }
+
+      it { should eq [available] }
+    end
+  end
+
 end

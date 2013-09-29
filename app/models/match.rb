@@ -10,4 +10,22 @@ class Match < ActiveRecord::Base
   scope :to_come, -> { where('(starting_time > ?) OR (starting_time IS NULL AND between_day1 > ?)', Time.now, Time.now) }
   scope :of, -> (team) { where('visitor_team_id = ? or local_team_id = ?', team.id, team.id) }
 
+  def to_s
+    "#{local_team.name} - #{visitor_team.name} (#{format_schedule})"
+  end
+
+  def format_schedule
+    if starting_time
+      starting_time.to_formatted_s(:short) 
+    elsif between_day1 && between_day2
+      "#{between_day1.to_formatted_s(:short)},#{between_day2.to_formatted_s(:short)}"
+    else
+      "-"
+    end      
+  end
+
+  def future?
+    (starting_time && starting_time.future?) || (starting_time.nil? && between_day1.future?)
+  end
+
 end

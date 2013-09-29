@@ -1,0 +1,25 @@
+- user_availability = current_user.availability_for match
+- if user_availability.nil?
+  - availability_yes = Availability.new(user: current_user, match: match, availability: true)
+  = simple_form_for availability_yes do |f|
+    = f.association :user, as: :hidden
+    = f.association :match, as: :hidden
+    = f.input :availability, as: :hidden
+    %button.btn.btn-success.btn-sm
+      Dispo
+  = simple_form_for Availability.new(user: current_user, match: match, availability: false) do |f|
+    = f.association :user, as: :hidden
+    = f.association :match, as: :hidden
+    = f.input :availability, as: :hidden
+    %button.btn.btn-danger.btn-sm
+      Pas dispo
+- elsif user_availability.availability
+  .alert.alert-success
+    %strong Dispo!
+    %small
+      = link_to 'changer', availability_path(user_availability, availability: 0), method: :patch
+- else
+  .alert.alert-danger
+    %strong Non dispo
+    %small
+      = link_to 'changer', availability_path(user_availability, availability: 1), method: :patch

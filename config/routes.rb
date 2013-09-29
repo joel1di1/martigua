@@ -1,5 +1,15 @@
 Martigua::Application.routes.draw do
   
+  resources :availabilities do 
+    collection do 
+      resources :matches, only: [] do
+        collection do
+          post '', to: 'availabilities#bulk_change', via: [:post], as: 'bulk_availabilities'
+        end
+      end
+    end
+  end
+
   devise_for :users
 
   resources :users, only: [:index, :show, :edit, :update]
