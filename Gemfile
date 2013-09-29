@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'puma'
 
 gem 'ransack'
-gem 'activeadmin', github: 'gregbell/active_admin', branch: 'rails4'
+gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'simple_form', '~> 3.0.0'
 gem 'haml'
 gem 'devise'
