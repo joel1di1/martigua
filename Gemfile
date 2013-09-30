@@ -35,6 +35,7 @@ gem 'haml'
 gem 'devise'
 gem 'omniauth'
 gem 'nilify_blanks'
+gem 'airbrake'
 
 group :production do
   gem 'pg'
