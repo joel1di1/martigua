@@ -36,6 +36,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'nilify_blanks'
 gem 'airbrake'
+gem 'postmark-rails'
 
 group :production do
   gem 'pg'

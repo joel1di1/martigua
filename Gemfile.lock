@@ -162,6 +162,12 @@ GEM
     polyamorous (0.6.4)
       activerecord (>= 3.0)
     polyglot (0.3.3)
+    postmark (1.0.1)
+      json
+      rake
+    postmark-rails (0.5.2)
+      actionmailer (>= 3.0.0)
+      postmark (~> 1.0)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -285,6 +291,7 @@ DEPENDENCIES
   nilify_blanks
   omniauth
   pg
+  postmark-rails
   puma
   rails (= 4.0.0)
   rails_12factor
