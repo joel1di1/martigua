@@ -1,0 +1,41 @@
+%h1= @match
+
+.raw
+  .col-md-3
+    .panel.panel-default
+      .panel-heading
+        .panel-title Infos du match
+      .panel-body
+        %p
+          %strong Locaux:
+          = @match.local_team.name
+        %p
+          %strong Visiteurs:
+          = @match.visitor_team.name
+        %p
+          %strong Horaire:
+          = @match.format_schedule
+        %p
+          %strong Lieu:
+          = render partial: 'locations/gmaps_link', locals: {location: @match.location}
+        - unless @match.official_url.blank?
+          %p 
+            %strong Lien fédé:
+            = link_to 'site officiel', @match.official_url
+
+
+  .col-md-4
+    .panel.panel-default
+      .panel-heading
+        .panel-title Joueurs présents
+      %ul.list-group
+        - @match.users.each do |player|
+          - add_class = (player.certificat_medical? && player.cotisation?) ? 'text-success' : 'text-warning'
+          %li.list-group-item{class: add_class}
+            = link_to player.full_name, player, class: add_class
+            - unless player.certificat_medical? && player.cotisation?
+              (
+              = "pas de cotis " unless player.cotisation?
+              - unless player.certificat_medical?
+                %span.text-danger pas de certif
+              )

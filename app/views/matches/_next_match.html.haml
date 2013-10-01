@@ -1,5 +1,5 @@
-%tr
-  - if next_match
+- if next_match
+  %tr.as_link{'data-url' => match_path(next_match)}
     %td.text-center= next_match.local_team.name
     %td.text-center= next_match.visitor_team.name
     %td.text-center= next_match.format_schedule 
@@ -9,3 +9,5 @@
       - if next_match.future?
         = render partial: 'availabilities/match_availability', locals: {match: next_match}
 
+- else
+  %tr

@@ -57,6 +57,7 @@ group :development, :test do
   gem 'guard-rails'
   gem 'guard-rspec'
   gem 'guard-spork'
+  gem 'taps'
 end
 
 group :test do

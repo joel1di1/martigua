@@ -16,12 +16,15 @@
         - unless current_user.set_availability_for? @next_matches
           .alert.alert-warning
             Tu n'as pas encore rensigné tes dispos pour les prochains matchs
-        %table.table.table-bordered.table-condensed
+        %table.table.table-bordered.table-condensed.table-hover
           = render partial: 'matches/next_match', collection: @next_matches
-        .bulk_actions.pull-right
-          = simple_form_for current_user, url: bulk_availabilities_matches_path(id: @next_matches.map(&:id), availability: 1), method: :post do |f|
-            %button.btn.btn-xs.btn-success Dispo pour tous les matchs
-          = simple_form_for current_user, url: bulk_availabilities_matches_path(id: @next_matches.map(&:id), availability: 1), method: :post do |f|
-            %button.btn.btn-xs.btn-danger Dispo pour aucun match
+
+        - ids = @next_matches.compact.map(&:id)
+        - unless ids.empty?
+          .bulk_actions.pull-right
+            = simple_form_for current_user, url: bulk_availabilities_matches_path(id: ids, availability: 1), method: :post do |f|
+              %button.btn.btn-xs.btn-success Dispo pour tous les matchs
+            = simple_form_for current_user, url: bulk_availabilities_matches_path(id: ids, availability: 1), method: :post do |f|
+              %button.btn.btn-xs.btn-danger Dispo pour aucun match
 
 

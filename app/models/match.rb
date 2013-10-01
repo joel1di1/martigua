@@ -4,6 +4,9 @@ class Match < ActiveRecord::Base
   belongs_to :visitor_team, class_name: 'Team'
   belongs_to :local_team, class_name: 'Team'
 
+  has_many :availabilities
+  has_many :users, through: :availabilities
+
   validates_presence_of :visitor_team, :local_team
 
   scope :finished, -> { where('starting_time < ?', Time.now) }

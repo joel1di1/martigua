@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
   end
 
   def set_availability_for?(matches)
-    matches.count == availabilities.where(match_id: matches.map(&:id)).count
+    matches.compact.count == availabilities.where(match_id: matches.compact.map(&:id)).count
   end
 
   protected 
