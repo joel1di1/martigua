@@ -24,7 +24,7 @@
           .bulk_actions.pull-right
             = simple_form_for current_user, url: bulk_availabilities_matches_path(id: ids, availability: 1), method: :post do |f|
               %button.btn.btn-xs.btn-success Dispo pour tous les matchs
-            = simple_form_for current_user, url: bulk_availabilities_matches_path(id: ids, availability: 1), method: :post do |f|
+            = simple_form_for current_user, url: bulk_availabilities_matches_path(id: ids, availability: 0), method: :post do |f|
               %button.btn.btn-xs.btn-danger Dispo pour aucun match
 
 
