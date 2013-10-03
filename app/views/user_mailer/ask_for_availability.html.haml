@@ -15,16 +15,16 @@
     %tbody
     - @matches.each do |match|
       %tr
-        %td.text-center= match.name
+        %td{style: 'text-align: center'}= match.name
         %td= match.format_schedule
         %td
           = render partial: 'locations/gmaps_link', locals: {location: match.location} 
         %td
-          %input{type: :checkbox, name: 'id[]'} 
+          %input{type: :checkbox, name: 'id[]', value: match.id} 
   %button Valider mes dispos
 
-.green-action
-  = link_to 'Dispo pour tous les matchs !!', bulk_availabilities_matches_url(id: @matches.map(&:id), availability: 1, user_email: @user.email, user_token: @user.authentication_token), method: :post 
+.green-action{style: 'background: #5cb85c'}
+  = link_to 'Dispo pour tous les matchs !!', bulk_availabilities_matches_url(id: @matches.map(&:id), availability: 1, user_email: @user.email, user_token: @user.authentication_token), method: :post, style: 'color: white;'
 
-.red-action
-  = link_to 'Dispo aucun match :(', bulk_availabilities_matches_url(id: @matches.map(&:id), availability: 0, user_email: @user.email, user_token: @user.authentication_token), method: :post 
+.red-action{style: 'background: #d9534f'}
+  = link_to 'Dispo aucun match :(', bulk_availabilities_matches_url(id: @matches.map(&:id), availability: 0, user_email: @user.email, user_token: @user.authentication_token), method: :post, style: 'color: white;'
