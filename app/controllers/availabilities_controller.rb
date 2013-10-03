@@ -1,5 +1,6 @@
 class AvailabilitiesController < InheritedResources::Base
 
+  skip_before_filter :verify_authenticity_token, only: [:bulk_change]
   skip_before_filter :authenticate_user!, only: [:bulk_change]
 
 
