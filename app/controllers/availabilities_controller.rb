@@ -1,5 +1,8 @@
 class AvailabilitiesController < InheritedResources::Base
 
+  skip_before_filter :authenticate_user!, only: [:bulk_change]
+
+
   belongs_to :user
   belongs_to :match
 
@@ -23,6 +26,7 @@ class AvailabilitiesController < InheritedResources::Base
 
   def bulk_change
     current_user.change_all_availabilities(params[:id], params[:availability] === '1')
+    flash[:notice] = 'Tes dispos ont bien été enregistrées !'
     redirect_to root_path
   end
 

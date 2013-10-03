@@ -2,21 +2,29 @@
   Matchs du weekend : 
   = @weekend
 
-%table
-  %thead
-    %tr
-      %th Match
-      %th Horaire
-      %th
-  %tbody
-  - @matches.each do |match|
-    %tr
-      %td= match.name
-      %td= match.format_schedule
-      %td
-        -# = link_to "dispo"
-        -# = link_to "Pas dispo"
+%form{acion: bulk_availabilities_matches_url, method: :post}
+  %input{type: :hidden, name: :user_email, value: @user.email}
+  %input{type: :hidden, name: :user_token, value: @user.authentication_token}
+  %table
+    %thead
+      %tr
+        %th Match
+        %th Horaire
+        %th Lieu
+        %th Dispo ?
+    %tbody
+    - @matches.each do |match|
+      %tr
+        %td.text-center= match.name
+        %td= match.format_schedule
+        %td
+          = render partial: 'locations/gmaps_link', locals: {location: match.location} 
+        %td
+          %input{type: :checkbox, name: 'id[]'} 
+  %button Valider mes dispos
 
-= link_to 'Dispo pour tous les matchs !!', bulk_availabilities_matches_url(id: @matches.map(&:id), availability: 1, user_email: @user.email, user_token: @user.authentication_token), method: :post 
+.green-action
+  = link_to 'Dispo pour tous les matchs !!', bulk_availabilities_matches_url(id: @matches.map(&:id), availability: 1, user_email: @user.email, user_token: @user.authentication_token), method: :post 
 
-= link_to 'Dispo aucun match :(', bulk_availabilities_matches_url(id: @matches.map(&:id), availability: 1, user_email: @user.email, user_token: @user.authentication_token), method: :post 
+.red-action
+  = link_to 'Dispo aucun match :(', bulk_availabilities_matches_url(id: @matches.map(&:id), availability: 1, user_email: @user.email, user_token: @user.authentication_token), method: :post 

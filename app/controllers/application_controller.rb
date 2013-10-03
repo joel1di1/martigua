@@ -7,7 +7,18 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_club
 
+  before_filter :authenticate_user_or_token!
+
   protected
+
+    def authenticate_user_or_token!
+      user = User.find_by_authentication_token(params[:user_token]) if params[:user_token]
+      if user  
+        sign_in user
+      else
+        authenticate_user!
+      end
+    end
 
     def layout_by_resource
       if devise_controller?

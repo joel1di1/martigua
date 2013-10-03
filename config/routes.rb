@@ -6,7 +6,7 @@ Martigua::Application.routes.draw do
     collection do 
       resources :matches, only: [] do
         collection do
-          post '', to: 'availabilities#bulk_change', via: [:post], as: 'bulk_availabilities'
+          match '', to: 'availabilities#bulk_change', via: [:post, :get], as: 'bulk_availabilities'
         end
       end
     end
