@@ -23,8 +23,8 @@
           %input{type: :checkbox, name: 'id[]', value: match.id} 
   %button Valider mes dispos
 
-.green-action{style: 'background: #5cb85c'}
+.green-action{style: 'background: #5cb85c; display: inline-block; padding: 10px; font-size: 16px; margin: 10px;'}
   = link_to 'Dispo pour tous les matchs !!', bulk_availabilities_matches_url(id: @matches.map(&:id), availability: 1, user_email: @user.email, user_token: @user.authentication_token), method: :post, style: 'color: white;'
 
-.red-action{style: 'background: #d9534f'}
+.red-action{style: 'background: #d9534f; display: inline-block; padding: 10px; font-size: 16px; margin: 10px;'}
   = link_to 'Dispo aucun match :(', bulk_availabilities_matches_url(id: @matches.map(&:id), availability: 0, user_email: @user.email, user_token: @user.authentication_token), method: :post, style: 'color: white;'
