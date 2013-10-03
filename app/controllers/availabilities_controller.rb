@@ -24,7 +24,12 @@ class AvailabilitiesController < InheritedResources::Base
   end
 
   def bulk_change
-    current_user.change_all_availabilities(params[:id], params[:availability] === '1')
+    if params[:id_present]
+      current_user.change_all_availabilities(params[:id], true)
+      current_user.change_all_availabilities(params[:id_present] - params[:id], false)
+    else
+      current_user.change_all_availabilities(params[:id], params[:availability] == '1')
+    end
     flash[:notice] = 'Tes dispos ont bien été enregistrées !'
     redirect_to root_path
   end

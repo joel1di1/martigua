@@ -20,6 +20,7 @@
         %td
           = render partial: 'locations/gmaps_link', locals: {location: match.location} 
         %td
+          %input{type: :hidden, name: 'id_present[]', value: match.id} 
           %input{type: :checkbox, name: 'id[]', value: match.id} 
   %button Valider mes dispos
 
