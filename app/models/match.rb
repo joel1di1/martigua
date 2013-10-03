@@ -52,6 +52,18 @@ class Match < ActiveRecord::Base
     end
   end
 
+  def available_players
+    availabilities.includes(:user).where(availability: true).map(&:user)
+  end
+
+  def non_available_players
+    availabilities.includes(:user).where(availability: false).map(&:user)
+  end
+
+  def uncertain_players
+    User.active - availabilities.includes(:user).map(&:user)
+  end
+
   class << self
     def ask_for_availability(match_ids)
       matches = Match.where(id: [*match_ids].flatten).all
