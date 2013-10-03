@@ -54,7 +54,7 @@ class Match < ActiveRecord::Base
 
   class << self
     def ask_for_availability(match_ids)
-      matches = Match.where(id: [*match_ids]).load
+      matches = Match.where(id: [*match_ids].flatten).all
       User.where(active: true).each do |user| 
         UserMailer.delay.ask_for_availability(matches, user)
       end

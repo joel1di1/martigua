@@ -26,5 +26,13 @@
               %button.btn.btn-xs.btn-success Dispo pour tous les matchs
             = simple_form_for current_user, url: bulk_availabilities_matches_path(id: ids, availability: 0), method: :post do |f|
               %button.btn.btn-xs.btn-danger Dispo pour aucun match
+        - if current_user.is_coach?
+          .pull-left
+            = simple_form_for current_user, url: invitations_path(match_id: ids), method: :post do
+              %button.btn.btn-primary 
+                Envoyer les invitations
+                %br
+                à tous les joueurs
 
+                  
 
