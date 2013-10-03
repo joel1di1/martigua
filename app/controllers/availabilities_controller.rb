@@ -26,7 +26,7 @@ class AvailabilitiesController < InheritedResources::Base
   def bulk_change
     if params[:id_present]
       current_user.change_all_availabilities(params[:id], true)
-      current_user.change_all_availabilities(params[:id_present] - params[:id], false)
+      current_user.change_all_availabilities(params[:id_present] - [*params[:id]], false)
     else
       current_user.change_all_availabilities(params[:id], params[:availability] == '1')
     end
