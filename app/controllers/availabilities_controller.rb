@@ -6,7 +6,7 @@ class AvailabilitiesController < InheritedResources::Base
   def create
     @match = Match.find params[:availability][:match_id]
     @availability = Availability.create match: @match, user: current_user, availability: params[:availability][:availability]
-    redirect_to request.env["HTTP_REFERER"]
+    redirect_to request.env["HTTP_REFERER"] || root_path
   end
 
   def update
@@ -14,7 +14,7 @@ class AvailabilitiesController < InheritedResources::Base
 
     @availability.update_attributes availability: (params[:availability] == '1')
 
-    redirect_to request.env["HTTP_REFERER"]
+    redirect_to request.env["HTTP_REFERER"] || root_path
   end
 
   def permitted_params

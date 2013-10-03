@@ -8,8 +8,8 @@ class UserMailer < ActionMailer::Base
   def ask_for_availability(matches, user)
     @matches = matches
     @user = user
-
-    mail :to => @user.email, :subject => "Dispo pour les matchs du #{Match.schedule_for(@matches)}"
+    @weekend = Match.schedule_for(@matches)
+    mail :to => @user.email, :subject => "Dispo pour les matchs du #{@weekend} ?"
   end
   
 end

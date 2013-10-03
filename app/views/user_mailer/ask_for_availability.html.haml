@@ -1,1 +1,22 @@
-%h1 TEST
+%h1
+  Matchs du weekend : 
+  = @weekend
+
+%table
+  %thead
+    %tr
+      %th Match
+      %th Horaire
+      %th
+  %tbody
+  - @matches.each do |match|
+    %tr
+      %td= match.name
+      %td= match.format_schedule
+      %td
+        -# = link_to "dispo"
+        -# = link_to "Pas dispo"
+
+= link_to 'Dispo pour tous les matchs !!', bulk_availabilities_matches_url(id: @matches.map(&:id), availability: 1, user_email: @user.email, user_token: @user.authentication_token), method: :post 
+
+= link_to 'Dispo aucun match :(', bulk_availabilities_matches_url(id: @matches.map(&:id), availability: 1, user_email: @user.email, user_token: @user.authentication_token), method: :post 
