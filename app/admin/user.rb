@@ -8,6 +8,7 @@ ActiveAdmin.register User do
     column :active
     column :phone
     column :cotisation
+    column :is_coach
     column :certificat_medical
     column :current_sign_in_at
     default_actions
@@ -21,6 +22,7 @@ ActiveAdmin.register User do
       f.input :nickname
       f.input :phone
       f.input :active
+      f.input :is_coach
       f.input :cotisation
       f.input :certificat_medical
     end

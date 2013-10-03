@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   nilify_blanks
 
   after_create :send_invitation_mail
+
+  scope :active, -> { where(active: true) }
  
   def password_required?
     # Password is required if it is being set, but not for new records
@@ -66,7 +68,8 @@ class User < ActiveRecord::Base
   end
 
   def set_availability_for?(matches)
-    matches.compact.count == availabilities.where(match_id: matches.compact.map(&:id)).count
+    matches = matches.compact.select{|match| match.visitor_team.name != 'PAS DE MATCH'}
+    matches.count == availabilities.where(match_id: matches.map(&:id)).count
   end
 
   protected 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130929130252) do
+ActiveRecord::Schema.define(version: 20131001222054) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -82,6 +82,22 @@ ActiveRecord::Schema.define(version: 20130929130252) do
   add_index "commitments", ["championship_id"], name: "index_commitments_on_championship_id"
   add_index "commitments", ["team_id"], name: "index_commitments_on_team_id"
 
+  create_table "delayed_jobs", force: true do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+
   create_table "locations", force: true do |t|
     t.string   "name",       null: false
     t.text     "address"
@@ -148,6 +164,7 @@ ActiveRecord::Schema.define(version: 20130929130252) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.string   "authentication_token",   default: "",    null: false
+    t.boolean  "is_coach",               default: false, null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

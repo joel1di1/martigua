@@ -31,4 +31,31 @@ class Match < ActiveRecord::Base
     (starting_time && starting_time.future?) || (starting_time.nil? && between_day1.future?)
   end
 
+  def best_start_day
+    starting_time ? starting_time.to_date : between_day1
+  end
+  def best_end_day
+    starting_time ? starting_time.to_date : between_day2
+  end
+
+  def self.schedule_for(matches)
+    start_day = matches.map(&:best_start_day).sort.first
+    end_day = matches.map(&:best_end_day).sort.last
+    if start_day == end_day
+      start_day.to_formatted_s(:short)
+    else
+      "#{start_day.to_formatted_s(:short)} / #{end_day.to_formatted_s(:short)}"
+    end
+  end
+
+  class << self
+    def ask_for_availability(match_ids)
+      matches = Match.where(id: [*match_ids]).load
+      User.where(active: true).each do |user| 
+        UserMailer.delay.ask_for_availability(matches, user)
+      end
+    end
+    handle_asynchronously :ask_for_availability
+  end
+
 end

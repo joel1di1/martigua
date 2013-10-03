@@ -1,5 +1,7 @@
 Martigua::Application.routes.draw do
   
+  resources :invitations, only: [:create]
+
   resources :availabilities do 
     collection do 
       resources :matches, only: [] do
