@@ -2,7 +2,7 @@
   Matchs du weekend : 
   = @weekend
 
-%form{acion: bulk_availabilities_matches_url, method: :post}
+%form{action: bulk_availabilities_matches_url, method: :post}
   %input{type: :hidden, name: :user_email, value: @user.email}
   %input{type: :hidden, name: :user_token, value: @user.authentication_token}
   %table
@@ -27,4 +27,4 @@
   = link_to 'Dispo pour tous les matchs !!', bulk_availabilities_matches_url(id: @matches.map(&:id), availability: 1, user_email: @user.email, user_token: @user.authentication_token), method: :post 
 
 .red-action
-  = link_to 'Dispo aucun match :(', bulk_availabilities_matches_url(id: @matches.map(&:id), availability: 1, user_email: @user.email, user_token: @user.authentication_token), method: :post 
+  = link_to 'Dispo aucun match :(', bulk_availabilities_matches_url(id: @matches.map(&:id), availability: 0, user_email: @user.email, user_token: @user.authentication_token), method: :post 
