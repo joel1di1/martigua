@@ -38,6 +38,7 @@ gem 'nilify_blanks'
 gem 'airbrake'
 gem 'postmark-rails'
 gem 'delayed_job_active_record'
+gem 'heroku-api'
 
 group :production do
   gem 'pg'
