@@ -1,0 +1,9 @@
+%h1
+  Entrainement du 
+  = @training.date.to_s(:short)
+
+.green-action{style: 'background: #5cb85c; display: inline-block; padding: 10px; font-size: 16px; margin: 10px;'}
+  = link_to 'Dispo !!', bulk_availabilities_trainings_url(id: [@training.id], available: 1, user_email: @user.email, user_token: @user.authentication_token), method: :post, style: 'color: white;'
+
+.red-action{style: 'background: #d9534f; display: inline-block; padding: 10px; font-size: 16px; margin: 10px;'}
+  = link_to 'Pas dispo :(', bulk_availabilities_trainings_url(id: [@training.id], available: 0, user_email: @user.email, user_token: @user.authentication_token), method: :post, style: 'color: white;'

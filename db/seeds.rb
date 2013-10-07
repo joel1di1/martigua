@@ -7,3 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 admin = AdminUser.create!(email: 'admin@martigua.fr', password: 'martigua2')
+
+martigua = Club.create!(name: 'Martigua')

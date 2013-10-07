@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131005112843) do
+ActiveRecord::Schema.define(version: 20131007203755) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -131,6 +131,17 @@ ActiveRecord::Schema.define(version: 20131005112843) do
   end
 
   add_index "teams", ["club_id"], name: "index_teams_on_club_id"
+
+  create_table "training_availabilities", force: true do |t|
+    t.integer  "user_id",     null: false
+    t.integer  "training_id", null: false
+    t.boolean  "available"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "training_availabilities", ["training_id"], name: "index_training_availabilities_on_training_id"
+  add_index "training_availabilities", ["user_id"], name: "index_training_availabilities_on_user_id"
 
   create_table "trainings", force: true do |t|
     t.datetime "date"

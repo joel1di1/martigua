@@ -12,6 +12,16 @@ Martigua::Application.routes.draw do
     end
   end
 
+  resources :training_availabilities do 
+    collection do 
+      resources :trainings, only: [] do
+        collection do
+          match '', to: 'training_availabilities#bulk_change', via: [:post, :get], as: 'bulk_availabilities'
+        end
+      end
+    end
+  end
+
   devise_for :users
 
   resources :users, only: [:index, :show, :edit, :update]

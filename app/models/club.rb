@@ -6,4 +6,8 @@ class Club < ActiveRecord::Base
     teams.map(&:last_match)
   end
 
+  def next_trainings
+    Training.nexts
+  end
+
 end

@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
   has_many :availabilities, dependent: :delete_all
 
+  has_many :training_availabilities, dependent: :delete_all
+
   validates_presence_of :email, :authentication_token
 
   before_validation :ensure_authentication_token
@@ -54,6 +56,10 @@ class User < ActiveRecord::Base
     availabilities.where(match_id: match.id).first
   end
 
+  def training_availability_for(training)
+    training_availabilities.where(training: training).first
+  end
+
   def to_s
     full_name
   end
@@ -67,9 +73,23 @@ class User < ActiveRecord::Base
     end
   end
 
+  def change_all_training_availabilities(training_ids, available)
+    TrainingAvailability.transaction do 
+      TrainingAvailability.where(user: self, training_id: training_ids).delete_all
+      Training.where(id: training_ids).map do |training|
+        TrainingAvailability.create! user: self, training: training, available: available
+      end
+    end
+  end
+
   def set_availability_for?(matches)
     matches = matches.compact.select{|match| match.visitor_team.name != 'PAS DE MATCH'}
     matches.count == availabilities.where(match_id: matches.map(&:id)).count
+  end
+
+  def set_availability_for_trainings?(trainings)
+    trainings = trainings.compact
+    trainings.count == training_availabilities.where(training_id: trainings.map(&:id)).count
   end
 
   protected 

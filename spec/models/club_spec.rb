@@ -39,7 +39,23 @@ describe Club do
         end
       end
     end
+  end
 
+  describe '#next_trainings' do
+
+    subject { club.next_trainings }
+
+    context 'with no trainings' do
+      it { should eq [] }
+    end
+    context 'with two training in the next days' do
+      let!(:training_1){ create :training, date: 1.day.from_now }
+      let!(:training_2){ create :training, date: 4.day.from_now }
+      let!(:training_3){ create :training, date: 9.day.from_now }
+
+      its(:count) { should eq 2}
+      it { should eq [training_1, training_2] }
+    end
   end
 
 end
