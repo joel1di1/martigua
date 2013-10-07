@@ -50,9 +50,9 @@
         - unless ids.empty?
           .bulk_actions.pull-right
             = simple_form_for current_user, url: bulk_availabilities_trainings_path(id: ids, available: 1), method: :post do |f|
-              %button.btn.btn-xs.btn-success Dispo pour tous les trainings
+              %button.btn.btn-xs.btn-success Dispo pour tous les entraînements
             = simple_form_for current_user, url: bulk_availabilities_trainings_path(id: ids, available: 0), method: :post do |f|
-              %button.btn.btn-xs.btn-danger Dispo pour aucun training
+              %button.btn.btn-xs.btn-danger Dispo pour aucun entraînements
 
                   
 
