@@ -6,7 +6,7 @@
         %h3.panel-title Résultats des derniers matchs
       .panel-body
         %table.table.table-bordered.table-condensed
-          = render partial: 'matches/result', collection: @last_matches
+          = render partial: 'matches/result', collection: @last_matches.compact
 
   .col-md-8
     .panel.panel-default

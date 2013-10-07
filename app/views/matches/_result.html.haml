@@ -1,10 +1,13 @@
 %tr
-  - if result
+  - if result.local_score && result.visitor_score
     - local_class = result.local_score > result.visitor_score ? 'winner' : nil
     - visitor_class = result.local_score < result.visitor_score ? 'winner' : nil
-    %td.text-center{class: local_class}= result.local_team.name
-    %td.text-center
-      %span{class: local_class}= result.local_score
-      \-
-      %span{class: visitor_class}= result.visitor_score
-    %td.text-center{class: visitor_class}= result.visitor_team.name
+  - else
+    - local_class, visitor_class = nil
+
+  %td.text-center{class: local_class}= result.local_team.name
+  %td.text-center
+    %span{class: local_class}= result.local_score
+    \-
+    %span{class: visitor_class}= result.visitor_score
+  %td.text-center{class: visitor_class}= result.visitor_team.name
