@@ -1,12 +1,4 @@
 %tr
-  %td.text-center= next_training.date.to_formatted_s(:short)
+  %td.text-center= next_training.date.to_formatted_s(:day_hour)
   %td.text-center= render partial: 'locations/gmaps_link', locals: {location: next_training.location}
   %td.availability= render partial: 'trainings/availability', locals: {training: next_training}
-  - if current_user.is_coach?
-    %td
-      = simple_form_for current_user, url: invitations_path(training_id: next_training.id), method: :post do
-        %button.btn.btn-primary 
-          Envoyer les invitations
-          %br
-          à tous les joueurs
-
