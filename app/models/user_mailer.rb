@@ -15,8 +15,8 @@ class UserMailer < ActionMailer::Base
   def ask_for_training_availability(trainings, user)
     @trainings = trainings
     @user = user
-    dates = @trainings.map{|t| t.date.to_s(:short)}
-    mail :to => @user.email, :subject => "Dispo pour les entrainement #{dates} ?"
+    dates = @trainings.map{|t| t.date.to_s(:short)}.join(',')
+    mail :to => @user.email, :subject => "Dispo pour les entrainements des #{dates} ?"
   end
   
 end
