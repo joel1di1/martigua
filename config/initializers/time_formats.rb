@@ -1,0 +1,1 @@
+Time::DATE_FORMATS[:day_hour] = '%A %d %B'
