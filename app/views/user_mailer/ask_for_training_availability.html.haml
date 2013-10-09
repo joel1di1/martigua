@@ -1,6 +1,6 @@
 %h1
   Entrainements: 
-  = @trainings.map{|t| t.date.to_s(:short_day_hour)).join(',')
+  = @trainings.map{|t| t.date.to_s(:short_day_hour)} .join(',')
 
 %form{action: bulk_availabilities_trainings_url, method: :post}
   %input{type: :hidden, name: :user_email, value: @user.email}
