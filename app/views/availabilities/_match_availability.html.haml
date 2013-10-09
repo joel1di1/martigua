@@ -14,12 +14,10 @@
     %button.btn.btn-danger.btn-sm
       Pas dispo
 - elsif user_availability.availability
-  .alert.alert-success
-    %strong Dispo!
-    %small
-      = link_to 'changer', availability_path(user_availability, availability: 0), method: :patch
+  = link_to availability_path(user_availability, availability: 0), method: :patch do
+    .alert.alert-success
+      %strong Dispo!
 - else
-  .alert.alert-danger
-    %strong Non dispo
-    %small
-      = link_to 'changer', availability_path(user_availability, availability: 1), method: :patch
+  = link_to availability_path(user_availability, availability: 1), method: :patch do
+    .alert.alert-danger
+      %strong Non dispo
