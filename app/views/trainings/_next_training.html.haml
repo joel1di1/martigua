@@ -1,4 +1,12 @@
-%tr
+%tr.as_link{'data-url' => training_path(next_training)}
   %td.text-center= next_training.date.to_formatted_s(:day_hour)
+  %td.text-center
+    (
+    %span.text-success.strong{'data-toggle' => "tooltip"}= next_training.available_players.count
+    \/
+    %span.text-danger.strong= next_training.non_available_players.count
+    \/
+    %span.text-warning.strong= next_training.uncertain_players.count
+    )
   %td.text-center= render partial: 'locations/gmaps_link', locals: {location: next_training.location}
   %td.availability= render partial: 'trainings/availability', locals: {training: next_training}

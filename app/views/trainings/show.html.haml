@@ -1,0 +1,38 @@
+.container
+  %h1
+    = @training.date.to_s(:day_hour)    
+  = render partial: 'locations/gmaps_link', locals: {location: @training.location}
+
+.raw
+  .col-md-4
+    .panel.panel-default
+      .panel-heading
+        .panel-title
+          = @training.available_players.count
+          Joueurs dispos
+      %ul.list-group
+        - @training.available_players.each do |player|
+          %li.list-group-item
+            = link_to player.full_name, player, class: 'text-success'
+
+  .col-md-4
+    .panel.panel-default
+      .panel-heading
+        .panel-title
+          = @training.non_available_players.count
+          Joueurs non dispos
+      %ul.list-group
+        - @training.non_available_players.each do |player|
+          %li.list-group-item
+            = link_to player.full_name, player, class: 'text-warning'
+
+  .col-md-4
+    .panel.panel-default
+      .panel-heading
+        .panel-title
+          = @training.uncertain_players.count
+          Joueurs incertains
+      %ul.list-group
+        - @training.uncertain_players.each do |player|
+          %li.list-group-item
+            = link_to player.full_name, player, class: 'text-muted'
