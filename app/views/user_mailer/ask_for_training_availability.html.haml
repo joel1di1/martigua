@@ -23,7 +23,7 @@
   %button Valider mes dispos
 
 .green-action{style: 'background: #5cb85c; display: inline-block; padding: 10px; font-size: 16px; margin: 10px;'}
-  = link_to 'Dispo !!', bulk_availabilities_trainings_url(id: @trainings.map(&:id), available: 1, user_email: @user.email, user_token: @user.authentication_token), method: :post, style: 'color: white;'
+  = link_to 'Dispo pour tous les entrainements !!', bulk_availabilities_trainings_url(id: @trainings.map(&:id), available: 1, user_email: @user.email, user_token: @user.authentication_token), method: :post, style: 'color: white;'
 
 .red-action{style: 'background: #d9534f; display: inline-block; padding: 10px; font-size: 16px; margin: 10px;'}
-  = link_to 'Pas dispo :(', bulk_availabilities_trainings_url(id: @trainings.map(&:id), available: 0, user_email: @user.email, user_token: @user.authentication_token), method: :post, style: 'color: white;'
+  = link_to 'Dispo pour aucun :(', bulk_availabilities_trainings_url(id: @trainings.map(&:id), available: 0, user_email: @user.email, user_token: @user.authentication_token), method: :post, style: 'color: white;'
