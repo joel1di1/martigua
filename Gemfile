@@ -55,10 +55,12 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# Use sqlite3 as the database for Active Record
+group :development do
+  gem 'pg'
+end
+
 group :development, :test do
   gem 'debugger'
-  gem 'sqlite3'
   gem 'factory_girl_rails'
   gem 'spork-rails'
   gem 'guard-rails'
@@ -68,6 +70,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'sqlite3'
   gem 'rspec'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
