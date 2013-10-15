@@ -30,7 +30,6 @@ class AvailabilitiesController < InheritedResources::Base
     else
       current_user.change_all_availabilities(params[:id], params[:availability] == '1')
     end
-    flash[:notice] = 'Tes dispos ont bien été enregistrées !'
     redirect_to root_path
   end
 

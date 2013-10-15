@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+    def only_coachs
+      redirect_to root_url unless current_user.try(:is_coach)
+    end
+
     def authenticate_user_or_token!
       user = User.find_by_authentication_token(params[:user_token]) if params[:user_token]
       if user  

@@ -1,8 +1,10 @@
 - if next_match
   - no_match = next_match.visitor_team.name == 'PAS DE MATCH'
   %tr.as_link{'data-url' => match_path(next_match)}
-    %td.text-center= next_match.local_team.name
-    %td.text-center= next_match.visitor_team.name
+    %td.text-center
+      = next_match.local_team.name
+      \-
+      = next_match.visitor_team.name
     %td.text-center= next_match.format_schedule 
     %td.text-center
       = render partial: 'locations/gmaps_link', locals: {location: next_match.location} unless no_match

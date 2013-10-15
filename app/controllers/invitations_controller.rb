@@ -10,6 +10,6 @@ class InvitationsController < ApplicationController
     end
       
     flash[:notice] = 'Les invitations vont être envoyées'
-    redirect_to root_path
+    redirect_to coach_home_path
   end
 end

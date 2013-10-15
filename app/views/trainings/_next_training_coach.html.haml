@@ -1,0 +1,11 @@
+%tr.as_link{'data-url' => training_path(next_training_coach)}
+  %td.text-center= next_training_coach.date.to_formatted_s(:day_hour)
+  %td.text-center
+    (
+    %span.text-success.strong{'data-toggle' => "tooltip"}= next_training_coach.available_players.count
+    \/
+    %span.text-danger.strong= next_training_coach.non_available_players.count
+    \/
+    %span.text-warning.strong= next_training_coach.uncertain_players.count
+    )
+  %td.text-center= render partial: 'locations/gmaps_link', locals: {location: next_training_coach.location}

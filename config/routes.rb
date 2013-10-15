@@ -38,6 +38,11 @@ Martigua::Application.routes.draw do
     resources :matches, only: [:index]
   end
 
+  scope 'coach' do
+    get '/', to: 'coach_home#index', as: 'coach_home'
+  end
+
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   
   ActiveAdmin.routes(self)

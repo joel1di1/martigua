@@ -1,0 +1,12 @@
+- if next_match_coach
+  - no_match = next_match_coach.visitor_team.name == 'PAS DE MATCH'
+  %tr.as_link{'data-url' => match_path(next_match_coach)}
+    %td.text-center
+      = next_match_coach.local_team.name
+      \-
+      = next_match_coach.visitor_team.name
+    %td.text-center= next_match_coach.format_schedule 
+    %td.text-center
+      = render partial: 'locations/gmaps_link', locals: {location: next_match_coach.location} unless no_match
+- else
+  %tr

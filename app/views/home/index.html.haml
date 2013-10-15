@@ -1,13 +1,4 @@
 .raw
-
-  .col-md-4
-    .panel.panel-default
-      .panel-heading
-        %h3.panel-title Résultats des derniers matchs
-      .panel-body
-        %table.table.table-bordered.table-condensed
-          = render partial: 'matches/result', collection: @last_matches.compact
-
   .col-md-8
     .panel.panel-default
       .panel-heading
@@ -23,18 +14,25 @@
         - unless ids.empty?
           .bulk_actions.pull-right
             = simple_form_for current_user, url: bulk_availabilities_matches_path(id: ids, availability: 1), method: :post do |f|
-              %button.btn.btn-xs.btn-success Dispo pour tous les matchs
+              %button.btn.btn-xs.btn-success J'suis un bonhomme, j'suis dispo pour tout
             = simple_form_for current_user, url: bulk_availabilities_matches_path(id: ids, availability: 0), method: :post do |f|
-              %button.btn.btn-xs.btn-danger Dispo pour aucun match
-        - if current_user.is_coach?
-          .pull-left
-            = simple_form_for current_user, url: invitations_path(match_id: ids), method: :post do
-              %button.btn.btn-primary 
-                Envoyer les invitations
-                %br
-                à tous les joueurs
+              %button.btn.btn-xs.btn-danger Je suis une petit fiotte je suis pas là ce week-end
+        -# - if current_user.is_coach?
+        -#   .pull-left
+        -#     = simple_form_for current_user, url: invitations_path(match_id: ids), method: :post do
+        -#       %button.btn.btn-primary 
+        -#         Envoyer les invitations
+        -#         %br
+        -#         à tous les joueurs
 
-                  
+  .col-md-4
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title Résultats des derniers matchs
+      .panel-body
+        %table.table.table-bordered.table-condensed
+          = render partial: 'matches/result', collection: @last_matches.compact
+
   .col-md-8
     .panel.panel-default
       .panel-heading
@@ -53,15 +51,13 @@
               %button.btn.btn-xs.btn-success Dispo pour tous les entraînements
             = simple_form_for current_user, url: bulk_availabilities_trainings_path(id: ids, available: 0), method: :post do |f|
               %button.btn.btn-xs.btn-danger Dispo pour aucun entraînements
-        - if current_user.is_coach?
-          .pull-left
-            = simple_form_for current_user, url: invitations_path(training_id: ids), method: :post do
-              %button.btn.btn-primary 
-                Envoyer les invitations
-                %br
-                à tous les joueurs
-
+        -# - if current_user.is_coach?
+        -#   .pull-left
+        -#     = simple_form_for current_user, url: invitations_path(training_id: ids), method: :post do
+        -#       %button.btn.btn-primary 
+        -#         Envoyer les invitations
+        -#         %br
+        -#         à tous les joueurs
                   
-
 
 
