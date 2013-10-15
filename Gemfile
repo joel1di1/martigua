@@ -39,6 +39,11 @@ gem 'airbrake'
 gem 'postmark-rails'
 gem 'delayed_job_active_record'
 gem 'heroku-api'
+gem 'memcachier'
+
+group :chef do
+  gem 'sqlite3'
+end
 
 group :production do
   gem 'pg'
