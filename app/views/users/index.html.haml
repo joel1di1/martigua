@@ -1,26 +1,24 @@
-.container
-  #content.bs-header
-    %h1 Listing users
-  %table.table.table-condensed.table-hover.table-striped
-    %thead
+#content.bs-header
+  %h1 Listing users
+%table.table.table-condensed.table-hover.table-striped
+  %thead
+    %tr
+      %th Prénom
+      %th Nom
+      %th Surnom
+      %th Email
+      %th Tel
+      %th Cotis payée ?
+      %th Certif ?
+      %th
+  %tbody
+    - @users.each do |user|
       %tr
-        %th Prénom
-        %th Nom
-        %th Surnom
-        %th Email
-        %th Tel
-        %th Cotis payée ?
-        %th Certif ?
-        %th
-        %th
-    %tbody
-      - @users.each do |user|
-        %tr
-          %td= user.first_name
-          %td= user.last_name
-          %td= user.nickname
-          %td= mail_to user.email
-          %td= link_to user.phone, "tel:#{user.phone}" if user.phone
-          %td= t(user.cotisation.to_s)
-          %td= t(user.certificat_medical.to_s)
-          %td= link_to 'Show', user
+        %td= user.first_name
+        %td= user.last_name
+        %td= user.nickname
+        %td= mail_to user.email
+        %td= link_to user.phone, "tel:#{user.phone}" if user.phone
+        %td= t(user.cotisation.to_s)
+        %td= t(user.certificat_medical.to_s)
+        %td= link_to 'Show', user

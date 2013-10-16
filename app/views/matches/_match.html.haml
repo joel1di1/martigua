@@ -1,9 +1,8 @@
 %tr
-  %td= match.local_team.name
-  %td= match.visitor_team.name
+  %td.text-center= link_to "#{match.local_team.name} - #{match.visitor_team.name}", match_path(match)
   %td= match.format_schedule
   %td= render partial: 'locations/gmaps_link', locals: {location: match.location}
-  %td= "#{match.local_score} - #{match.visitor_score}"
-  %td.availability
+  %td.text-center= "#{match.local_score} - #{match.visitor_score}"
+  %td.text-center.availability
     - if (match.starting_time && match.starting_time.future?) || (match.starting_time.nil? && match.between_day1.future?)
       = render partial: 'availabilities/match_availability', locals: {match: match}

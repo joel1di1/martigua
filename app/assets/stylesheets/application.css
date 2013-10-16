@@ -22,7 +22,3 @@ span.translation_missing{
   color: red;
   border: 1px solid red;
 }
-
-tr.as_link{
-  cursor: pointer;
-}
