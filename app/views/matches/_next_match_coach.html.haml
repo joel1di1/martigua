@@ -1,7 +1,10 @@
 - match = next_match_coach
 - if match
   %tr.text-center
-    %td= link_to "#{match.title}", match_path(match)
+    - if match.exempt?
+      %td= match.title
+    - else
+      %td= link_to "#{match.title}", match_path(match)
     %td= match.format_schedule 
     %td
       = render partial: 'locations/gmaps_link', locals: {location: match.location} unless match.exempt?
