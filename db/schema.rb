@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131016115811) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql" unless Rails.env.test?
+
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
     t.text     "body"
@@ -24,9 +27,9 @@ ActiveRecord::Schema.define(version: 20131016115811) do
     t.datetime "updated_at"
   end
 
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -43,8 +46,8 @@ ActiveRecord::Schema.define(version: 20131016115811) do
     t.datetime "updated_at"
   end
 
-  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
-  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "availabilities", force: true do |t|
     t.integer  "user_id",                      null: false
@@ -54,9 +57,9 @@ ActiveRecord::Schema.define(version: 20131016115811) do
     t.datetime "updated_at"
   end
 
-  add_index "availabilities", ["match_id"], name: "index_availabilities_on_match_id"
-  add_index "availabilities", ["user_id", "match_id"], name: "index_availabilities_on_user_id_and_match_id", unique: true
-  add_index "availabilities", ["user_id"], name: "index_availabilities_on_user_id"
+  add_index "availabilities", ["match_id"], name: "index_availabilities_on_match_id", using: :btree
+  add_index "availabilities", ["user_id", "match_id"], name: "index_availabilities_on_user_id_and_match_id", unique: true, using: :btree
+  add_index "availabilities", ["user_id"], name: "index_availabilities_on_user_id", using: :btree
 
   create_table "championships", force: true do |t|
     t.string   "name"
@@ -79,8 +82,8 @@ ActiveRecord::Schema.define(version: 20131016115811) do
     t.datetime "updated_at"
   end
 
-  add_index "commitments", ["championship_id"], name: "index_commitments_on_championship_id"
-  add_index "commitments", ["team_id"], name: "index_commitments_on_team_id"
+  add_index "commitments", ["championship_id"], name: "index_commitments_on_championship_id", using: :btree
+  add_index "commitments", ["team_id"], name: "index_commitments_on_team_id", using: :btree
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -96,7 +99,7 @@ ActiveRecord::Schema.define(version: 20131016115811) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "locations", force: true do |t|
     t.string   "name",       null: false
@@ -120,8 +123,8 @@ ActiveRecord::Schema.define(version: 20131016115811) do
     t.integer  "location_id"
   end
 
-  add_index "matches", ["championship_id"], name: "index_matches_on_championship_id"
-  add_index "matches", ["location_id"], name: "index_matches_on_location_id"
+  add_index "matches", ["championship_id"], name: "index_matches_on_championship_id", using: :btree
+  add_index "matches", ["location_id"], name: "index_matches_on_location_id", using: :btree
 
   create_table "teams", force: true do |t|
     t.string   "name",       null: false
@@ -130,7 +133,7 @@ ActiveRecord::Schema.define(version: 20131016115811) do
     t.integer  "club_id"
   end
 
-  add_index "teams", ["club_id"], name: "index_teams_on_club_id"
+  add_index "teams", ["club_id"], name: "index_teams_on_club_id", using: :btree
 
   create_table "training_availabilities", force: true do |t|
     t.integer  "user_id",     null: false
@@ -140,8 +143,8 @@ ActiveRecord::Schema.define(version: 20131016115811) do
     t.datetime "updated_at"
   end
 
-  add_index "training_availabilities", ["training_id"], name: "index_training_availabilities_on_training_id"
-  add_index "training_availabilities", ["user_id"], name: "index_training_availabilities_on_user_id"
+  add_index "training_availabilities", ["training_id"], name: "index_training_availabilities_on_training_id", using: :btree
+  add_index "training_availabilities", ["user_id"], name: "index_training_availabilities_on_user_id", using: :btree
 
   create_table "trainings", force: true do |t|
     t.datetime "date"
@@ -152,7 +155,7 @@ ActiveRecord::Schema.define(version: 20131016115811) do
     t.text     "cancelation_reason"
   end
 
-  add_index "trainings", ["location_id"], name: "index_trainings_on_location_id"
+  add_index "trainings", ["location_id"], name: "index_trainings_on_location_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name"
@@ -182,7 +185,7 @@ ActiveRecord::Schema.define(version: 20131016115811) do
     t.boolean  "is_coach",               default: false, null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
