@@ -4,6 +4,7 @@ class Match < ActiveRecord::Base
   belongs_to :match_day
   belongs_to :visitor_team, class_name: 'Team'
   belongs_to :local_team, class_name: 'Team'
+  has_one :selection
 
   has_many :availabilities
   has_many :users, through: :availabilities
@@ -14,6 +15,8 @@ class Match < ActiveRecord::Base
   scope :of, -> (team) { where('visitor_team_id = ? or local_team_id = ?', team.id, team.id) }
 
   scope :on, -> (match_day) { where(match_day: match_day) }
+
+  after_create :create_empty_selection
 
   def name
     "#{local_team.name} - #{visitor_team.name}"
@@ -61,6 +64,14 @@ class Match < ActiveRecord::Base
     else
       "#{local_team.name} - #{visitor_team.name}"
     end
+  end
+
+  def create_empty_selection
+    selection ||= Selection.create!(match: self)
+  end
+
+  def selected_players
+    selection.users
   end
 
   class << self

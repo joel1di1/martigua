@@ -24,4 +24,27 @@ describe Match do
       it { should eq true }
     end
   end
+
+  describe 'selected_players' do
+    let!(:non_selected_1) { create :user }
+    let!(:non_selected_2) { create :user }
+    let!(:selected_1) { create :user }
+    let!(:selected_2) { create :user }
+
+    before { match.selection.users << selected_1 }
+    before { match.selection.users << selected_2 }
+
+    subject { match.selected_players }
+
+    it { should eq [selected_1, selected_2] }
+  end
+
+  describe '#create' do
+    let(:match) { build :match }
+
+    subject { match.save!; match }
+
+    its(:selection) { should_not be_nil }
+  end
+
 end

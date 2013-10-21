@@ -6,8 +6,9 @@ class User < ActiveRecord::Base
          :trackable, :validatable
 
   has_many :availabilities, dependent: :delete_all
-
   has_many :training_availabilities, dependent: :delete_all
+  
+  has_and_belongs_to_many :selections
 
   validates_presence_of :email, :authentication_token
 

@@ -17,16 +17,16 @@
       .panel-heading
         .panel-title Joueurs sélectionnés
       %ul.list-group
--#         - @match.selected_players.each do |player|
--#           - add_class = (player.certificat_medical? && player.cotisation?) ? 'text-success' : 'text-warning'
--#           %li.list-group-item{class: add_class}
--#             = link_to player.full_name, player, class: add_class
--#             - unless player.certificat_medical? && player.cotisation?
--#               (
--#               = "pas de cotis " unless player.cotisation?
--#               - unless player.certificat_medical?
--#                 %span.text-danger pas de certif
--#               )
+        - @match.selected_players.each do |player|
+          - add_class = (player.certificat_medical? && player.cotisation?) ? 'text-success' : 'text-warning'
+          %li.list-group-item{class: add_class}
+            = link_to player.full_name, player, class: add_class
+            - unless player.certificat_medical? && player.cotisation?
+              (
+              = "pas de cotis " unless player.cotisation?
+              - unless player.certificat_medical?
+                %span.text-danger pas de certif
+              )
 
 .row
   .col-md-4
