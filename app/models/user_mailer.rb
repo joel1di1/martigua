@@ -19,4 +19,11 @@ class UserMailer < ActionMailer::Base
     mail :to => @user.email, :subject => "Dispo pour les entrainements des #{dates} ?"
   end
   
+
+  def notify_user_for_training_cancelation(training, user)
+    @training = training
+    @user = user
+    mail :to => @user.email, :subject => "L'entrainement du @training.date.to_s(:short)"
+  end
+
 end

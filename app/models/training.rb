@@ -7,13 +7,24 @@ class Training < ActiveRecord::Base
   def available_players
     training_availabilities.includes(:user).where(available: true).map(&:user)
   end
+
   def non_available_players
     training_availabilities.includes(:user).where(available: false).map(&:user)
   end
+
   def uncertain_players
     User.active - training_availabilities.map(&:user)
   end
 
+  def cancel!(reason)
+    notify_users_for_cancelation
+    update_attribute :canceled, true
+  end
+
+  def notify_users_for_cancelation
+    User.all.map{ |u| UserMailer.delay.notify_user_for_training_cancelation(self, u) }.count
+  end
+  handle_asynchronously :notify_users_for_cancelation
 
   class << self
     def ask_for_availability(training_ids)

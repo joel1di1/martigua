@@ -1,0 +1,10 @@
+%h1
+  L'entrainements du 
+  = @training.date.to_s(:short)
+  est annulé !
+
+%label
+  la raison : 
+
+%p
+  = @training.cancelation_reason
