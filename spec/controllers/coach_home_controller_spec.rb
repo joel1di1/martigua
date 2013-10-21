@@ -6,7 +6,8 @@ describe CoachHomeController do
   let!(:martigua_1) { create :team, name: "Martigua 1", club: martigua }
   let!(:martigua_2) { create :team, name: "Martigua 2", club: martigua }
   let!(:martigua_3) { create :team, name: "Martigua 3", club: martigua }
- 
+  let!(:match_day) { create :match_day, :futur }
+  
   describe "GET #index" do
     let(:password) { 'secret' }
     let(:user) { create :user, password: password}

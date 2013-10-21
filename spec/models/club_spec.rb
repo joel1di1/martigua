@@ -16,27 +16,44 @@ describe Club do
 
 
   describe '#last_matches' do
+    let(:match_day) { create :match_day, :finished }
     
     subject { club.last_matches }
 
-    context 'with 3 teams' do
-      context 'with no previous matches' do
-        its(:size) { should eq 3 }
-        its(:first) { should be_nil }
-        its(:second) { should be_nil }
-        its(:third) { should be_nil }
+    context 'with no previous matches' do
+      its(:size) { should eq 3 }
+      its(:first) { should be_nil }
+      its(:second) { should be_nil }
+      its(:third) { should be_nil }
+    end
+
+    context 'with 3 previous matches' do
+      let!(:match_1) { create :match, match_day: match_day, local_team: team_1, visitor_team: other_1 }
+      let!(:match_2) { create :match, match_day: match_day, local_team: team_2, visitor_team: other_2 }
+      let!(:match_3) { create :match, match_day: match_day, local_team: team_3, visitor_team: other_3 }
+
+      its(:size) { should eq 3 }
+
+      it 'should includes the 3 matches' do
+        assert subject - [match_1, match_2, match_3] == []
       end
+    end
+  end
 
-      context 'with 3 previous matches' do
-        let!(:match_1) { create :match, :finished, local_team: team_1, visitor_team: team_1 }
-        let!(:match_2) { create :match, :finished, local_team: team_2, visitor_team: team_2 }
-        let!(:match_3) { create :match, :finished, local_team: team_3, visitor_team: team_3 }
+  describe '#next_matches' do
+    let(:match_day) { create :match_day, :futur }
 
-        its(:size) { should eq 3 }
+    subject { club.next_matches }
 
-        it 'should includes the 3 matches' do
-          assert subject - [match_1, match_2, match_3] == []
-        end
+    context 'with 3 matches' do
+      let!(:match_1) { create :match, match_day: match_day, local_team: team_1, visitor_team: other_1 }
+      let!(:match_2) { create :match, match_day: match_day, local_team: other_2, visitor_team: team_2 }
+      let!(:match_3) { create :match, match_day: match_day, local_team: team_3, visitor_team: other_3 }
+
+      its(:size) { should eq 3 }
+
+      it 'should includes the 3 matches' do
+        assert subject - [match_1, match_2, match_3] == []
       end
     end
   end

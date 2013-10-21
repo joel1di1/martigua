@@ -83,7 +83,7 @@ class User < ActiveRecord::Base
   end
 
   def set_availability_for?(matches)
-    matches = matches.compact.select{|match| match.visitor_team.name != 'PAS DE MATCH'}
+    matches = matches.compact.select{|match| !match.exempt?}
     matches.count == availabilities.where(match_id: matches.map(&:id)).count
   end
 

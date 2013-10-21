@@ -7,26 +7,21 @@ describe Match do
   it { should validate_presence_of(:local_team) }
   it { should validate_presence_of(:visitor_team) }
 
-  describe '.to_come' do
-    subject { Match.to_come }
+  let(:match) { create :match }
 
-    context 'with a finished match' do
-      let!(:finished_match) { create :match, :finished }
+  describe '#exempt?' do
+    subject { match.exempt? }
 
-      it { should be_empty }
-
-      context 'with a defined scheduled match in 2 weeks' do
-        let!(:scheduled_match) { create :match, :finished, starting_time: 2.weeks.from_now }
-
-        it { should eq [scheduled_match] }
-
-        context 'with a non scheduled match in 1 weeks' do
-          let!(:we_scheduled_match) { create :match, :finished, between_day1: 6.days.from_now, between_day2: 7.days.from_now, starting_time: nil }
-
-          it { should eq [scheduled_match, we_scheduled_match] }
-        end
-      end
+    context 'with standard match default' do
+      it { should eq false }
     end
 
+    context 'with exempt match' do 
+      let(:team) { create :team }
+      let(:match_day) { create :match_day }
+      let(:match) { Match.exempt(team, match_day) }
+
+      it { should eq true }
+    end
   end
 end

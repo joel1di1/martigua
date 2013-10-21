@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131021183337) do
+ActiveRecord::Schema.define(version: 20131021195504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql" unless Rails.env.test?
@@ -123,8 +123,6 @@ ActiveRecord::Schema.define(version: 20131021183337) do
     t.integer  "local_team_id",   null: false
     t.integer  "visitor_team_id", null: false
     t.datetime "starting_time"
-    t.date     "between_day1"
-    t.date     "between_day2"
     t.integer  "local_score"
     t.integer  "visitor_score"
     t.string   "official_url"

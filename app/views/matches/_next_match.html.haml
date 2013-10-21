@@ -1,13 +1,13 @@
-- if next_match
-  - no_match = next_match.visitor_team.name == 'PAS DE MATCH'
+- match = next_match
+- if match
   %tr.text-center
-    %td= link_to "#{next_match.local_team.name} - #{next_match.visitor_team.name}", match_path(next_match)
-    %td= next_match.format_schedule 
+    %td= link_to "#{match.title}", match_path(match)
+    %td= match.format_schedule 
     %td
-      = render partial: 'locations/gmaps_link', locals: {location: next_match.location} unless no_match
+      = render partial: 'locations/gmaps_link', locals: {location: match.location} unless match.exempt?
     %td.availability
-      - if next_match.future?
-        = render partial: 'availabilities/match_availability', locals: {match: next_match} unless no_match
+      - if match.future?
+        = render partial: 'availabilities/match_availability', locals: {match: match} unless match.exempt?
 
 - else
   %tr

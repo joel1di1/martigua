@@ -3,11 +3,17 @@ class Club < ActiveRecord::Base
   validates_presence_of :name
 
   def last_matches
-    teams.map(&:last_match)
+    match_day = MatchDay.previous
+    teams.map{ |t| t.match_on(match_day) }
   end
 
   def next_trainings
     Training.nexts
+  end
+
+  def next_matches
+    match_day = MatchDay.next
+    teams.map{ |t| t.match_on(match_day) }
   end
 
 end

@@ -1,10 +1,9 @@
 - match = next_match_coach
 - if match
-  - no_match = match.visitor_team.name == 'PAS DE MATCH'
-  %tr
-    %td.text-center= link_to "#{match.local_team.name} - #{match.visitor_team.name}", match_path(match)
-    %td.text-center= match.format_schedule 
-    %td.text-center
-      = render partial: 'locations/gmaps_link', locals: {location: match.location} unless no_match
+  %tr.text-center
+    %td= link_to "#{match.title}", match_path(match)
+    %td= match.format_schedule 
+    %td
+      = render partial: 'locations/gmaps_link', locals: {location: match.location} unless match.exempt?
 - else
   %tr

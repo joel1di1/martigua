@@ -1,13 +1,14 @@
+- match = result
 %tr
-  - if result.local_score && result.visitor_score
-    - local_class = result.local_score > result.visitor_score ? 'winner' : nil
-    - visitor_class = result.local_score < result.visitor_score ? 'winner' : nil
+  - if match.local_score && match.visitor_score
+    - local_class = match.local_score > match.visitor_score ? 'winner' : nil
+    - visitor_class = match.local_score < match.visitor_score ? 'winner' : nil
   - else
     - local_class, visitor_class = nil
 
-  %td.text-center{class: local_class}= result.local_team.name
+  %td.text-center{class: local_class}= match.local_team.name
   %td.text-center
-    %span{class: local_class}= result.local_score
+    %span{class: local_class}= match.local_score
     \-
-    %span{class: visitor_class}= result.visitor_score
-  %td.text-center{class: visitor_class}= result.visitor_team.name
+    %span{class: visitor_class}= match.visitor_score
+  %td.text-center{class: visitor_class}= match.exempt? ? 'EXEMPT' : match.visitor_team.name
