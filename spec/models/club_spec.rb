@@ -16,15 +16,15 @@ describe Club do
 
 
   describe '#last_matches' do
-    let(:match_day) { create :match_day, :finished }
+    let!(:match_day) { create :match_day, :finished }
     
     subject { club.last_matches }
 
     context 'with no previous matches' do
       its(:size) { should eq 3 }
-      its(:first) { should be_nil }
-      its(:second) { should be_nil }
-      its(:third) { should be_nil }
+      its(:first) { should_not be_nil }
+      its(:second) { should_not be_nil }
+      its(:third) { should_not be_nil }
     end
 
     context 'with 3 previous matches' do
@@ -41,7 +41,7 @@ describe Club do
   end
 
   describe '#next_matches' do
-    let(:match_day) { create :match_day, :futur }
+    let!(:match_day) { create :match_day, :futur }
 
     subject { club.next_matches }
 
