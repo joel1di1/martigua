@@ -1,6 +1,7 @@
 class Match < ActiveRecord::Base
   belongs_to :championship
   belongs_to :location
+  belongs_to :match_day
   belongs_to :visitor_team, class_name: 'Team'
   belongs_to :local_team, class_name: 'Team'
 
