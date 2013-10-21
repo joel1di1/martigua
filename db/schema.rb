@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20131021183337) do
   end
 
   create_table "match_days", force: true do |t|
+    t.integer  "num",        null: false
     t.date     "start_date", null: false
     t.date     "end_date",   null: false
     t.datetime "created_at"
