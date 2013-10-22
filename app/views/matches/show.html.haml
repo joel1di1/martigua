@@ -76,7 +76,7 @@
                 %span.text-danger pas de certif
               )
             - if current_user.is_coach? && !@match.match_day.selected_players.include?(player)
-              = link_to 'sélectionner!', selection_path(@match, remove_player: player.id), method: :patch, class: 'btn btn-xs btn-primary pull-right'
+              = link_to 'sélectionner!', selection_path(@match, add_player: player.id), method: :patch, class: 'btn btn-xs btn-primary pull-right'
               .clearfix
 
   .col-md-4
@@ -99,5 +99,5 @@
                 %span.text-danger pas de certif
               )
             - if current_user.is_coach? && !@match.match_day.selected_players.include?(player)
-              = link_to 'sélectionner!', selection_path(@match, remove_player: player.id), method: :patch, class: 'btn btn-xs btn-primary pull-right'
+              = link_to 'sélectionner!', selection_path(@match, add_player: player.id), method: :patch, class: 'btn btn-xs btn-primary pull-right'
               .clearfix
