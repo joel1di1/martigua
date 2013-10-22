@@ -38,6 +38,24 @@ class Match < ActiveRecord::Base
     (starting_time && starting_time.future?) || (starting_time.nil? && match_day.futur?)
   end
 
+  def best_start_day
+    starting_time ? starting_time.to_date : match_day.start_date
+  end
+  def best_end_day
+    starting_time ? starting_time.to_date : match_day.end_date
+  end
+ 
+  def self.schedule_for(matches)
+    start_day = matches.map(&:best_start_day).sort.first
+    end_day = matches.map(&:best_end_day).sort.last
+    if start_day == end_day
+      start_day.to_formatted_s(:short)
+    else
+      "#{start_day.to_formatted_s(:short)} / #{end_day.to_formatted_s(:short)}"
+    end
+    (starting_time && starting_time.future?) || (starting_time.nil? && match_day.futur?)
+  end
+
   def available_players
     availabilities.includes(:user).where(availability: true).map(&:user)
   end
