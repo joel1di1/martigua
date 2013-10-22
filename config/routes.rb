@@ -28,7 +28,11 @@ Martigua::Application.routes.draw do
 
   resources :locations, only: [:index, :show]
 
-  resources :matches, only: [:index, :show] 
+  resources :matches, only: [:index, :show] do
+    member do 
+      resource :selection, only: [:update]
+    end
+  end
 
   resources :trainings, only: [:index, :show]
 

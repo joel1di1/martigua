@@ -12,4 +12,8 @@ class MatchDay < ActiveRecord::Base
     "#{num}: #{start_date.to_s(:short)}/#{end_date.to_s(:short)}"
   end
 
+  def selected_players
+    User.joins(selections: :match).where(matches: { match_day_id: self.id } ).distinct
+  end
+
 end

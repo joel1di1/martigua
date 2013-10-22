@@ -27,6 +27,9 @@
               - unless player.certificat_medical?
                 %span.text-danger pas de certif
               )
+            - if current_user.is_coach?
+              = link_to 'déssélectionner!', selection_path(@match, remove_player: player.id), method: :patch, class: 'btn btn-xs btn-primary pull-right'
+              .clearfix
 
 .row
   .col-md-4
@@ -36,14 +39,22 @@
       %ul.list-group
         - @match.available_players.each do |player|
           - add_class = (player.certificat_medical? && player.cotisation?) ? 'text-success' : 'text-warning'
-          %li.list-group-item{class: add_class}
-            = link_to player.full_name, player, class: add_class
-            - unless player.certificat_medical? && player.cotisation?
-              (
-              = "pas de cotis " unless player.cotisation?
-              - unless player.certificat_medical?
-                %span.text-danger pas de certif
-              )
+          %li.list-group-item
+            %span{class: add_class}
+              - if @match.match_day.selected_players.include?(player)
+                %del
+                  = link_to player.full_name, player, class: add_class
+              - else
+                = link_to player.full_name, player, class: add_class
+              - unless player.certificat_medical? && player.cotisation?
+                (
+                = "pas de cotis " unless player.cotisation?
+                - unless player.certificat_medical?
+                  %span.text-danger pas de certif
+                )
+            - if current_user.is_coach? && !@match.match_day.selected_players.include?(player)
+              = link_to 'sélectionner!', selection_path(@match, add_player: player.id), method: :patch, class: 'btn btn-xs btn-primary pull-right'
+              .clearfix
 
   .col-md-4
     .panel.panel-default
@@ -53,13 +64,20 @@
         - @match.uncertain_players.each do |player|
           - add_class = (player.certificat_medical? && player.cotisation?) ? 'text-warning' : 'text-warning'
           %li.list-group-item{class: add_class}
-            = link_to player.full_name, player, class: add_class
+            - if @match.match_day.selected_players.include?(player)
+              %del
+                = link_to player.full_name, player, class: add_class
+            - else
+              = link_to player.full_name, player, class: add_class
             - unless player.certificat_medical? && player.cotisation?
               (
               = "pas de cotis " unless player.cotisation?
               - unless player.certificat_medical?
                 %span.text-danger pas de certif
               )
+            - if current_user.is_coach? && !@match.match_day.selected_players.include?(player)
+              = link_to 'sélectionner!', selection_path(@match, remove_player: player.id), method: :patch, class: 'btn btn-xs btn-primary pull-right'
+              .clearfix
 
   .col-md-4
     .panel.panel-default
@@ -69,10 +87,17 @@
         - @match.non_available_players.each do |player|
           - add_class = (player.certificat_medical? && player.cotisation?) ? 'text-muted' : 'text-warning'
           %li.list-group-item{class: add_class}
-            = link_to player.full_name, player, class: add_class
+            - if @match.match_day.selected_players.include?(player)
+              %del
+                = link_to player.full_name, player, class: add_class
+            - else
+              = link_to player.full_name, player, class: add_class
             - unless player.certificat_medical? && player.cotisation?
               (
               = "pas de cotis " unless player.cotisation?
               - unless player.certificat_medical?
                 %span.text-danger pas de certif
               )
+            - if current_user.is_coach? && !@match.match_day.selected_players.include?(player)
+              = link_to 'sélectionner!', selection_path(@match, remove_player: player.id), method: :patch, class: 'btn btn-xs btn-primary pull-right'
+              .clearfix
