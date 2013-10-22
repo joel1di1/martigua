@@ -53,7 +53,6 @@ class Match < ActiveRecord::Base
     else
       "#{start_day.to_formatted_s(:short)} / #{end_day.to_formatted_s(:short)}"
     end
-    (starting_time && starting_time.future?) || (starting_time.nil? && match_day.futur?)
   end
 
   def available_players
