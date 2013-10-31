@@ -93,6 +93,10 @@ class User < ActiveRecord::Base
     trainings.count == training_availabilities.where(training_id: trainings.map(&:id)).count
   end
 
+  def self.sort_by_full_name(users)
+    users.sort{|a, b| a.full_name <=> b.full_name }
+  end
+
   protected 
 
     def ensure_authentication_token

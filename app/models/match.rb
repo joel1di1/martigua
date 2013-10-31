@@ -56,15 +56,21 @@ class Match < ActiveRecord::Base
   end
 
   def available_players
-    availabilities.includes(:user).where(availability: true).map(&:user)
+    players = availabilities.includes(:user).where(availability: true).map(&:user)
+    players.select!{|p| p.active? }
+    User.sort_by_full_name players
   end
 
   def non_available_players
-    availabilities.includes(:user).where(availability: false).map(&:user)
+    players = availabilities.includes(:user).where(availability: false).map(&:user)
+    players.select!{|p| p.active? }
+    User.sort_by_full_name players
   end
 
   def uncertain_players
-    User.active - availabilities.includes(:user).map(&:user)
+    players = User.active - availabilities.includes(:user).map(&:user)
+    players.select!{|p| p.active? }
+    User.sort_by_full_name players
   end
 
   def exempt?
@@ -88,7 +94,7 @@ class Match < ActiveRecord::Base
   end
 
   def selected_players
-    selection.users
+    User.sort_by_full_name selection.users
   end
 
   class << self
