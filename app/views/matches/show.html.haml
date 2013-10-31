@@ -15,7 +15,7 @@
   .col-md-4.col-md-offset-4
     .panel.panel-default
       .panel-heading
-        .panel-title Joueurs sélectionnés
+        .panel-title= "Joueurs sélectionnés (#{@match.selected_players.count})"
       %ul.list-group
         - @match.selected_players.each do |player|
           - add_class = (player.certificat_medical? && player.cotisation?) ? 'text-success' : 'text-warning'
