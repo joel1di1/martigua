@@ -15,11 +15,16 @@
     - @trainings.each do |training|
       %tr
         %td= training.date.to_s(:day_hour)
-        %td
-          = render partial: 'locations/gmaps_link', locals: {location: training.location} 
-        %td
-          %input{type: :hidden, name: 'id_present[]', value: training.id} 
-          %input{type: :checkbox, name: 'id[]', value: training.id} 
+        - if training.canceled?
+          %td{colspan: 2}
+            %strong Entrainement annulé !
+            = training.cancelation_reason
+        - else
+          %td
+            = render partial: 'locations/gmaps_link', locals: {location: training.location} 
+          %td
+            %input{type: :hidden, name: 'id_present[]', value: training.id} 
+            %input{type: :checkbox, name: 'id[]', value: training.id} 
   %button Valider mes dispos
 
 .green-action{style: 'background: #5cb85c; display: inline-block; padding: 10px; font-size: 16px; margin: 10px;'}

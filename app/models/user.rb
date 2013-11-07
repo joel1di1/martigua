@@ -97,6 +97,10 @@ class User < ActiveRecord::Base
     users.sort{|a, b| a.full_name <=> b.full_name }
   end
 
+  def matches_reponds(matches)
+    matches.select{ |match| availabilities.where(match_id: match.id).exists? }
+  end
+
   protected 
 
     def ensure_authentication_token

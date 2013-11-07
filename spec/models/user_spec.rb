@@ -116,4 +116,36 @@ describe User do
     end
   end
 
+  describe '#matches_reponds' do
+    let(:match_responded_1) { create :match, :futur}
+    let(:match_responded_2) { create :match, :futur}
+    let(:match_not_responded_1) { create :match, :futur}
+    let(:match_not_responded_2) { create :match, :futur}
+
+    let!(:availability_1) { create :availability, user: user, match: match_responded_1 }
+    let!(:availability_2) { create :availability, user: user, match: match_responded_2 }
+
+    context 'with 2 matches not responded' do
+      let(:matches) { [match_not_responded_1, match_not_responded_2] }
+
+      subject { user.matches_reponds(matches) }
+
+      it { should eq [] }
+    end
+    context 'with 2 matches responded' do
+      let(:matches) { [match_responded_1, match_responded_2] }
+
+      subject { user.matches_reponds(matches) }
+
+      it { should eq [match_responded_1, match_responded_2] }
+    end
+    context 'with matches responded and not responded' do
+      let(:matches) { [match_responded_1, match_responded_2, match_not_responded_1, match_not_responded_2] }
+
+      subject { user.matches_reponds(matches) }
+
+      it { should eq [match_responded_1, match_responded_2] }
+    end
+  end
+
 end

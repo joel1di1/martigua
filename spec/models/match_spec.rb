@@ -47,4 +47,19 @@ describe Match do
     its(:selection) { should_not be_nil }
   end
 
+  describe '.ask_for_availability' do
+    let!(:user) { create :user }
+
+    context 'with 3 matches' do
+      let(:match_1) { create :match }
+      let(:match_2) { create :match }
+      let(:match_3) { create :match }
+      let(:matches) { [match_1, match_2, match_3] }
+      let(:match_ids) { matches.map(&:id) }
+
+      subject { Match.ask_for_availability_without_delay(match_ids) }
+
+      it { should_not be_nil}
+    end
+  end
 end

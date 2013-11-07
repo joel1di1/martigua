@@ -98,10 +98,11 @@ class Match < ActiveRecord::Base
   end
 
   class << self
-    def ask_for_availability(match_ids)
-      matches = Match.where(id: [*match_ids].flatten).all
-      User.where(active: true).each do |user| 
-        UserMailer.delay.ask_for_availability(matches, user)
+    def ask_for_availability(match_ids, force=false)
+      matches = Match.where(id: [*match_ids].flatten).load
+      User.where(active: true).each do |user|
+        matches_to_ask = force ? matches : (matches - user.matches_reponds(matches))
+        UserMailer.delay.ask_for_availability(matches_to_ask, user) unless matches_to_ask.empty?
       end
     end
     handle_asynchronously :ask_for_availability
