@@ -24,6 +24,11 @@ fr:
       user:
         send_instructions: "Vous allez recevoir un courriel contenant des instructions pour changer votre mot de passe."
         updated: "Votre mot de passe a été changé. Vous êtes maintenant connecté."
+      edit: 
+        change_your_password: "Changez votre mot de passe"
+        change_my_password: "Changer mon mot de passe"
+      new:
+        send_me_reset_password_instructions: "Envoyez-moi un courriel pour changer mon mot de passe"
     confirmations:
       send_instructions: "Vous allez recevoir un courriel contenant des instructions pour activer votre compte."
       confirmed: "Votre compte a été activé. Vous êtes maintenant connecté."
@@ -78,12 +83,6 @@ fr:
         # For "Click the link below to unlock your account"
         unlock_account_instruction: "Cliquez sur le lien ci-dessous pour déverrouiller votre compte"
         unlock_my_account: "Déverrouiller mon compte"
-    passwords:
-      edit: 
-        change_your_password: "Changez votre mot de passe"
-        change_my_password: "Changer mon mot de passe"
-      new:
-        send_me_reset_password_instructions: "Envoyez-moi un courriel pour changer mon mot de passe"
     registrations:
       edit:
         edit: "Modifier"
