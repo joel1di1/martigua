@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   after_create :send_invitation_mail
 
   scope :active, -> { where(active: true) }
+  scope :without_cotis, -> { where(cotisation: false) }
+  scope :without_certif, -> { where(certificat_medical: false) }
  
   def password_required?
     # Password is required if it is being set, but not for new records

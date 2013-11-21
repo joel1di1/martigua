@@ -1,6 +1,6 @@
 - training = next_training_coach
 
-%tr.as_link{'data-url' => training_path(training)}
+%tr
   %td.text-center= training.date.to_formatted_s(:day_hour)
   %td.text-center
     (
@@ -12,14 +12,18 @@
     )
   %td.text-center= render partial: 'locations/gmaps_link', locals: {location: training.location}
   %td.text-center
-    = link_to 'Annuler', '#', class: 'cancel_training'
+    %button.btn.btn-danger.btn-sm{type: :button, 'data-toggle' => "modal", 'data-target' => "#training_modal_#{training.id}"} Annuler
     
-    .modal.fade
+    .modal.fade{id: "training_modal_#{training.id}"}
       .modal-dialog
         .modal-content
           .modal-header
+            Annuler l'entrainement du
+            = training.date.to_formatted_s(:day_hour)
             %button{type: "button", class: "close", 'data-dismiss' => "modal", 'aria-hidden' => "true"} &times;
           .modal-body
             = simple_form_for training do |f|
-              = f.input :cancelation_reason
+              = f.input :canceled, as: :hidden, :input_html => { value: true }
+              = f.input :cancelation_reason, label: 'Raison de l\'annulation'
               %button.btn.btn-primary Annuler l'entrainement et envoyer les mails
+

@@ -24,3 +24,19 @@
           = simple_form_for current_user, url: invitations_path(training_id: ids), method: :post do
             %button.btn.btn-primary
               Envoyer les invitations à tous les joueurs
+
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title Joueurs sans cotis
+      .panel-body
+        - emails = @users_without_cotis.map(&:email).join(", ")
+        = mail_to emails, emails, subject: 'Paiement des cotisations'
+
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title Joueurs sans certifs
+      .panel-body
+        - emails = @users_without_certif.map(&:email).join(", ")
+        = mail_to emails, emails, subject: 'Certificats médicaux'
