@@ -1,7 +1,7 @@
 - training = next_training_coach
 
 %tr
-  %td.text-center= training.date.to_formatted_s(:day_hour)
+  %td.text-center= link_to training.date.to_formatted_s(:day_hour), training_path(training)
   %td.text-center
     (
     %span.text-success.strong{'data-toggle' => "tooltip"}= training.available_players.count
