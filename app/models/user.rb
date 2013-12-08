@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
     if event.is_a? Match
       availability_for(event).try(:availability)
     else
-      training_availability_for(event)
+      training_availability_for(event).try(:available)
     end
   end
 
