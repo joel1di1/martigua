@@ -12,4 +12,8 @@ class CoachHomeController < ApplicationController
     @users_without_certif = User.active.without_certif
   end
 
+  def stats
+    @users_attendence = UserStats.users_attendence
+  end
+
 end

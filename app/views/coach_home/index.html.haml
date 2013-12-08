@@ -19,6 +19,7 @@
         .text-center
           - ids = @next_trainings.compact.map(&:id)
 
+.row
   .col-md-6
     .panel.panel-default
       .panel-heading
@@ -34,3 +35,7 @@
       .panel-body
         - emails = @users_without_certif.map(&:email).join(", ")
         = mail_to emails, emails, subject: 'Certificats médicaux'
+
+.row
+  .col-md-6
+    = link_to "Stats", stats_path

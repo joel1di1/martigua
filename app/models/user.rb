@@ -51,8 +51,12 @@ class User < ActiveRecord::Base
     "#{id} #{full_name}".parameterize
   end
 
-  def available_for?(match)
-    availability_for(match).try(:availability)
+  def available_for?(event)
+    if event.is_a? Match
+      availability_for(event).try(:availability)
+    else
+      training_availability_for(event)
+    end
   end
 
   def availability_for(match)

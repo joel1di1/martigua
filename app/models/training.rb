@@ -3,6 +3,7 @@ class Training < ActiveRecord::Base
   has_many :training_availabilities
 
   scope :nexts, -> { where('date < ?', 7.days.from_now).where('date > ?', Time.now) }
+  scope :passed, -> { where('date < ?', Time.now) }
 
   def available_players
     training_availabilities.includes(:user).where(available: true).map(&:user)

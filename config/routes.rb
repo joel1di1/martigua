@@ -55,6 +55,7 @@ Martigua::Application.routes.draw do
 
   scope 'coach' do
     get '/', to: 'coach_home#index', as: 'coach_home'
+    get 'stats', to: 'coach_home#stats'
   end
 
 
