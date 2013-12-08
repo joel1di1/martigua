@@ -36,7 +36,7 @@ describe Match do
 
     subject { match.selected_players }
 
-    it { should eq [selected_1, selected_2] }
+    it { should =~ [selected_1, selected_2] }
   end
 
   describe '#create' do

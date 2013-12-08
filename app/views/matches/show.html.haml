@@ -20,20 +20,24 @@
         - @match.available_players.each do |player|
           - add_class = (player.certificat_medical? && player.cotisation?) ? 'text-success' : 'text-warning'
           %li.list-group-item
-            %span{class: add_class}
-              - if @match.match_day.selected_players.include?(player)
-                %del
-                  = link_to player.full_name, player, class: add_class
-              - else
+            - if @match.match_day.selected_players.include?(player)
+              %del
                 = link_to player.full_name, player, class: add_class
-              - unless player.certificat_medical? && player.cotisation?
+            - else
+              = link_to player.full_name, player, class: add_class
+            - unless player.certificat_medical? && player.cotisation?
+              %span{class: add_class}
                 (
                 = "pas de cotis " unless player.cotisation?
                 - unless player.certificat_medical?
                   %span.text-danger pas de certif
                 )
             - if current_user.is_coach? && !@match.match_day.selected_players.include?(player)
-              = link_to 'sélectionner!', selection_path(@match, add_player: player.id), method: :patch, class: 'btn btn btn-primary pull-right'
+              .pull-right
+                = link_to 'sélectionner!', selection_path(@match, add_player: player.id), method: :patch, class: 'btn btn btn-primary'
+                %br
+                %small
+                  = link_to "non dispo ?", set_availability_match_user_path(id: player.id, match_id: @match.id, availability: 0), method: :patch
               .clearfix
 
   .col-md-6
@@ -52,7 +56,8 @@
                 %span.text-danger pas de certif
               )
             - if current_user.is_coach?
-              = link_to 'supprimer', selection_path(@match, remove_player: player.id), method: :patch, class: 'btn btn-xs btn-primary pull-right'
+              .pull-right
+                = link_to 'supprimer', selection_path(@match, remove_player: player.id), method: :patch, class: 'btn btn-xs btn-primary'
               .clearfix
 
 .row
@@ -76,7 +81,11 @@
                 %span.text-danger pas de certif
               )
             - if current_user.is_coach? && !@match.match_day.selected_players.include?(player)
-              = link_to 'sélectionner!', selection_path(@match, add_player: player.id), method: :patch, class: 'btn btn-xs btn-primary pull-right'
+              .pull-right
+                %small
+                  = link_to "dispo ?", set_availability_match_user_path(id: player.id, match_id: @match.id, availability: 1), method: :patch
+                  ,
+                  = link_to "non dispo ?", set_availability_match_user_path(id: player.id, match_id: @match.id, availability: 0), method: :patch
               .clearfix
 
   .col-md-6
@@ -99,5 +108,7 @@
                 %span.text-danger pas de certif
               )
             - if current_user.is_coach? && !@match.match_day.selected_players.include?(player)
-              = link_to 'sélectionner!', selection_path(@match, add_player: player.id), method: :patch, class: 'btn btn-xs btn-primary pull-right'
+              .pull-right
+                %small
+                  = link_to "dispo ?", set_availability_match_user_path(id: player.id, match_id: @match.id, availability: 1), method: :patch
               .clearfix

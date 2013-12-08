@@ -1,0 +1,7 @@
+- availability = TrainingAvailability.new(user: user, training: training, available: availability)
+= simple_form_for availability do |f|
+  = f.association :user, as: :hidden
+  = f.association :training, as: :hidden
+  = f.input :available, as: :hidden
+  %button.btn.btn-sm{class: btn_clazz}
+    = text

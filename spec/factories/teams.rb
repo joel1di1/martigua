@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :team do
     club
-    name { Faker::Name.name }
+    name { ["psc", "finance", "martigua", "p18"].sample }
   end
 end

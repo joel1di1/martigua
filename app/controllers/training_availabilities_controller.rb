@@ -19,6 +19,17 @@ class TrainingAvailabilitiesController < InheritedResources::Base
     redirect_to request.env["HTTP_REFERER"] || root_path
   end
 
+  def set
+    user = User.find params[:id]
+
+    if user == current_user || current_user.is_coach?
+      training = Training.find params[:training_id]
+
+      user.change_training_availability!(training, params[:availability])
+    end
+    redirect_to request.env["HTTP_REFERER"] || root_path
+  end
+
   def permitted_params
     params.permit(:training_availability => [:user_id, :training_id, :available])
   end

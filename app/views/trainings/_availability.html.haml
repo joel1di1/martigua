@@ -1,18 +1,7 @@
 - user_training_availability = current_user.training_availability_for training
 - if user_training_availability.nil?
-  - available_yes = TrainingAvailability.new(user: current_user, training: training, available: true)
-  = simple_form_for available_yes do |f|
-    = f.association :user, as: :hidden
-    = f.association :training, as: :hidden
-    = f.input :available, as: :hidden
-    %button.btn.btn-success.btn-sm
-      Dispo
-  = simple_form_for TrainingAvailability.new(user: current_user, training: training, available: false) do |f|
-    = f.association :user, as: :hidden
-    = f.association :training, as: :hidden
-    = f.input :available, as: :hidden
-    %button.btn.btn-danger.btn-sm
-      Pas dispo
+  = render partial: 'trainings/availability_change', locals: { training: training, user: current_user, availability: true, btn_clazz: 'btn-success', text: 'Dispo' }
+  = render partial: 'trainings/availability_change', locals: { training: training, user: current_user, availability: false, btn_clazz: 'btn-danger', text: 'Pas dispo' }
 - elsif user_training_availability.available?
   = link_to training_availability_path(user_training_availability, available: 0), method: :patch do
     .alert.alert-success

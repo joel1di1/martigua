@@ -85,6 +85,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def change_training_availability!(training, available)
+    change_all_training_availabilities([training.id], available.to_i == 1)
+  end
+
+  def change_availability!(match, available)
+    change_all_availabilities([match.id], available.to_i == 1)
+  end
+
   def set_availability_for?(matches)
     matches = matches.compact.select{|match| !match.exempt?}
     matches.count == availabilities.where(match_id: matches.map(&:id)).count

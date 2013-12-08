@@ -33,4 +33,12 @@ class AvailabilitiesController < InheritedResources::Base
     redirect_to root_path
   end
 
+  def set
+    user = User.find params[:id]
+    match = Match.find params[:match_id]
+    availability = params[:availability]
+    user.change_availability!(match, availability)
+    redirect_to request.env["HTTP_REFERER"] || root_path
+  end
+
 end

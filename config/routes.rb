@@ -32,9 +32,20 @@ Martigua::Application.routes.draw do
     member do 
       resource :selection, only: [:update]
     end
+    resources :users, only: [] do 
+      member do
+        match 'availability', to: 'availabilities#set', via: [:post, :patch, :put], as: 'set_availability'
+      end
+    end
   end
 
-  resources :trainings, only: [:index, :show]
+  resources :trainings, only: [:index, :show] do
+    resources :users, only: [] do 
+      member do
+        match 'availability', to: 'training_availabilities#set', via: [:post, :patch, :put], as: 'set_availability'
+      end
+    end
+  end
 
   resources :ping, only: [:index]
 
