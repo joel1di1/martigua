@@ -22,6 +22,8 @@
             %li= link_to 'Tous', matches_path
             - current_club.teams.each do |team|
               %li= link_to team.name, team_matches_path(team)
+        %li
+          = link_to 'Entrainements', trainings_path
           
       %ul.nav.navbar-nav.navbar-right
         %li.dropdown

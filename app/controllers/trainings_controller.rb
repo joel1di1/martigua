@@ -5,4 +5,8 @@ class TrainingsController < InheritedResources::Base
   def permitted_params
     params.permit(:training => [:canceled, :cancelation_reason])
   end
+  protected
+    def collection
+      @trainings ||= end_of_association_chain.order('date ASC')
+    end
 end

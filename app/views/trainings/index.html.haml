@@ -1,14 +1,9 @@
-%h1 Liste des entrainements
-%table
-  %thead
-    %tr
-      %th Date
-      %th Lieu
-      %th
-      %th
-  %tbody
-    - @trainings.each do |training|
-      %tr
-        %td= training.date
-        %td= training.location
-        %td= link_to 'Show', training
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        .panel-title
+          Tous les entrainements
+      %ul.list-group
+        - @trainings.each do |training|
+          %li.list-group-item= link_to training.date.to_formatted_s(:day_hour), training_path(training)
