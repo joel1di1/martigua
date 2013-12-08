@@ -2,6 +2,8 @@ class AvailabilitiesController < InheritedResources::Base
 
   skip_before_filter :verify_authenticity_token, only: [:bulk_change]
 
+  before_filter :only_coachs, only: :set
+
   belongs_to :user
   belongs_to :match
 

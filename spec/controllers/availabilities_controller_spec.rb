@@ -37,6 +37,14 @@ describe AvailabilitiesController do
       its(:code) { should eq '302' }
     end
 
+    context 'with no coach' do
+      let(:other_user) { create :user }
+      before { sign_in other_user }
+      before { User.any_instance.should_receive(:change_availability!).never }
+
+      its(:code) { should eq '302' }
+    end
+
 
   end
 end
