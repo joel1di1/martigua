@@ -1,12 +1,20 @@
 %tr.text-center
-  %td= link_to next_training.date.to_formatted_s(:day_hour), training_path(next_training)
-  %td
-    (
-    %span.text-success.strong{'data-toggle' => "tooltip"}= next_training.available_players.count
-    \/
-    %span.text-danger.strong= next_training.non_available_players.count
-    \/
-    %span.text-warning.strong= next_training.uncertain_players.count
-    )
-  %td= render partial: 'locations/gmaps_link', locals: {location: next_training.location}
-  %td.availability= render partial: 'trainings/availability', locals: {training: next_training}
+  - if next_training.canceled
+    %td.text-danger
+      %del
+        = next_training.date.to_formatted_s(:day_hour)
+    %td.text-danger{colspan: 3}
+      entrainement annulé : 
+      = next_training.cancelation_reason
+  - else
+    %td= link_to next_training.date.to_formatted_s(:day_hour), training_path(next_training)
+    %td
+      (
+      %span.text-success.strong{'data-toggle' => "tooltip"}= next_training.available_players.count
+      \/
+      %span.text-danger.strong= next_training.non_available_players.count
+      \/
+      %span.text-warning.strong= next_training.uncertain_players.count
+      )
+    %td= render partial: 'locations/gmaps_link', locals: {location: next_training.location}
+    %td.availability= render partial: 'trainings/availability', locals: {training: next_training}
