@@ -1,6 +1,6 @@
 class UserStats
   def self.users_attendence
-    trainings = Training.passed
+    trainings = Training.passed.where(canceled: false)
     matches = Match.finished
     User.includes(:availabilities).includes(:training_availabilities).all.map do |user|
       training_attendence = 0.0
@@ -20,8 +20,8 @@ class UserStats
   end
 
   def self.training_attendence
-    trainings = Training.passed
-    User.includes(:availabilities).includes(:training_availabilities).all.map do |user|
+    trainings = Training.passed.where(canceled: false)
+    User.active.map do |user|
       training_attendence = 0.0
       trainings.each do |training|
         training_attendence += 1 if user.available_for? training
