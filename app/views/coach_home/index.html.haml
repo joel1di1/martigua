@@ -8,9 +8,6 @@
           = render partial: 'matches/next_match_coach', collection: @next_matches
         .text-center
           - ids = @next_matches.compact.map(&:id)
-          = simple_form_for current_user, url: invitations_path(match_id: ids), method: :post do
-            %button.btn.btn-primary 
-              Envoyer les invitations à tous les joueurs
 
   .col-md-12
     .panel.panel-default
@@ -21,9 +18,6 @@
           = render partial: 'trainings/next_training_coach', collection: @next_trainings
         .text-center
           - ids = @next_trainings.compact.map(&:id)
-          = simple_form_for current_user, url: invitations_path(training_id: ids), method: :post do
-            %button.btn.btn-primary
-              Envoyer les invitations à tous les joueurs
 
   .col-md-6
     .panel.panel-default
