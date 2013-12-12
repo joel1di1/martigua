@@ -34,8 +34,7 @@
                 )
             - if current_user.is_coach? && !@match.match_day.selected_players.include?(player)
               .pull-right
-                = link_to 'sélectionner!', selection_path(@match, add_player: player.id), method: :patch, class: 'btn btn btn-primary'
-                %br
+                = link_to 'sélectionner!', selection_path(@match, add_player: player.id), method: :patch, class: 'btn btn-xs btn-primary'
                 %small
                   = link_to "non dispo ?", set_availability_match_user_path(id: player.id, match_id: @match.id, availability: 0), method: :patch
               .clearfix
