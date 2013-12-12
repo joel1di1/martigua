@@ -19,7 +19,7 @@
       %ul.list-group
         - @match.available_players.each do |player|
           - add_class = (player.certificat_medical? && player.cotisation?) ? 'text-success' : 'text-warning'
-          %li.list-group-item
+          %li.list-group-item.sm
             - if @match.match_day.selected_players.include?(player)
               %del
                 = link_to player.full_name, player, class: add_class
@@ -46,7 +46,7 @@
       %ul.list-group
         - @match.selected_players.each do |player|
           - add_class = (player.certificat_medical? && player.cotisation?) ? 'text-success' : 'text-warning'
-          %li.list-group-item{class: add_class}
+          %li.list-group-item.sm{class: add_class}
             = link_to player.full_name, player, class: add_class
             - unless player.certificat_medical? && player.cotisation?
               (
@@ -67,7 +67,7 @@
       %ul.list-group
         - @match.uncertain_players.each do |player|
           - add_class = (player.certificat_medical? && player.cotisation?) ? 'text-warning' : 'text-warning'
-          %li.list-group-item{class: add_class}
+          %li.list-group-item.sm{class: add_class}
             - if @match.match_day.selected_players.include?(player)
               %del
                 = link_to player.full_name, player, class: add_class
@@ -94,7 +94,7 @@
       %ul.list-group
         - @match.non_available_players.each do |player|
           - add_class = (player.certificat_medical? && player.cotisation?) ? 'text-muted' : 'text-warning'
-          %li.list-group-item{class: add_class}
+          %li.list-group-item.sm{class: add_class}
             - if @match.match_day.selected_players.include?(player)
               %del
                 = link_to player.full_name, player, class: add_class
