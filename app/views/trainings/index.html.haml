@@ -4,6 +4,5 @@
       .panel-heading
         .panel-title
           Tous les entrainements
-      %ul.list-group
-        - @trainings.each do |training|
-          %li.list-group-item= link_to training.date.to_formatted_s(:day_hour), training_path(training)
+      %table.table.table-bordered.table-condensed.table-hover
+        = render partial: 'trainings/next_training', collection: @trainings

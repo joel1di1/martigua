@@ -7,6 +7,6 @@ class TrainingsController < InheritedResources::Base
   end
   protected
     def collection
-      @trainings ||= end_of_association_chain.order('date ASC')
+      @trainings ||= end_of_association_chain.includes(training_availabilities: :user).order('date ASC')
     end
 end
