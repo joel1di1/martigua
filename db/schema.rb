@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131021223010) do
+ActiveRecord::Schema.define(version: 20140216143238) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql" unless Rails.env.test?
+  enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -168,6 +168,17 @@ ActiveRecord::Schema.define(version: 20131021223010) do
 
   add_index "training_availabilities", ["training_id"], name: "index_training_availabilities_on_training_id", using: :btree
   add_index "training_availabilities", ["user_id"], name: "index_training_availabilities_on_user_id", using: :btree
+
+  create_table "training_presences", force: true do |t|
+    t.integer  "training_id"
+    t.integer  "user_id"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "training_presences", ["training_id"], name: "index_training_presences_on_training_id", using: :btree
+  add_index "training_presences", ["user_id"], name: "index_training_presences_on_user_id", using: :btree
 
   create_table "trainings", force: true do |t|
     t.datetime "date"

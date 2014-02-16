@@ -1,5 +1,7 @@
 Martigua::Application.routes.draw do
   
+  resources :training_presences
+
   resources :invitations, only: [:create]
 
   resources :availabilities do 
@@ -45,7 +47,12 @@ Martigua::Application.routes.draw do
         match 'availability', to: 'training_availabilities#set', via: [:post, :patch, :put], as: 'set_availability'
       end
     end
-  end
+    resources :training_presences do 
+      collection do 
+        get 'edit', to: 'training_presences#edit_list'
+      end
+    end
+   end
 
   resources :ping, only: [:index]
 

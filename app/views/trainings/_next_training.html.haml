@@ -1,20 +1,38 @@
+- training = next_training
+
 %tr.text-center
-  - if next_training.canceled
+  - if training.canceled
     %td.text-danger
       %del
-        = next_training.date.to_formatted_s(:day_hour)
+        = training.date.to_formatted_s(:day_hour)
     %td.text-danger{colspan: 3}
       entrainement annulé : 
-      = next_training.cancelation_reason
+      = training.cancelation_reason
   - else
-    %td= link_to next_training.date.to_formatted_s(:day_hour), training_path(next_training)
+    %td= link_to training.date.to_formatted_s(:day_hour), training_path(training)
     %td
       (
-      %span.text-success.strong{'data-toggle' => "tooltip"}= next_training.available_players.count
+      %span.text-success.strong{'data-toggle' => "tooltip"}= training.available_players.count
       \/
-      %span.text-danger.strong= next_training.non_available_players.count
+      %span.text-danger.strong= training.non_available_players.count
       \/
-      %span.text-warning.strong= next_training.uncertain_players.count
+      %span.text-warning.strong= training.uncertain_players.count
       )
-    %td= render partial: 'locations/gmaps_link', locals: {location: next_training.location}
-    %td.availability= render partial: 'trainings/availability', locals: {training: next_training}
+    %td= render partial: 'locations/gmaps_link', locals: {location: training.location}
+    %td.availability= render partial: 'trainings/availability', locals: {training: training}
+    - if current_user.is_coach?
+      %td.text-center
+        %button.btn.btn-danger.btn-sm{type: :button, 'data-toggle' => "modal", 'data-target' => "#training_modal_#{training.id}"} Annuler
+        
+        .modal.fade{id: "training_modal_#{training.id}"}
+          .modal-dialog
+            .modal-content
+              .modal-header
+                Annuler l'entrainement du
+                = training.date.to_formatted_s(:day_hour)
+                %button{type: "button", class: "close", 'data-dismiss' => "modal", 'aria-hidden' => "true"} &times;
+              .modal-body
+                = simple_form_for training do |f|
+                  = f.input :canceled, as: :hidden, :input_html => { value: true }
+                  = f.input :cancelation_reason, label: 'Raison de l\'annulation'
+                  %button.btn.btn-primary Annuler l'entrainement et envoyer les mails

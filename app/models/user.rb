@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   scope :active, -> { where(active: true) }
   scope :without_cotis, -> { where(cotisation: false) }
   scope :without_certif, -> { where(certificat_medical: false) }
+
+  default_scope { order('last_name ASC') } 
  
   def password_required?
     # Password is required if it is being set, but not for new records
@@ -37,7 +39,7 @@ class User < ActiveRecord::Base
 
   def full_name
     if nickname
-      nickname
+      "#{first_name} #{last_name} (#{nickname} )"
     elsif first_name && last_name
       "#{first_name} #{last_name}"
     elsif first_name

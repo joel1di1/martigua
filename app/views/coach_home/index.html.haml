@@ -2,12 +2,10 @@
   .col-md-12
     .panel.panel-default
       .panel-heading
-        %h3.panel-title Prochains matchs
+        %h3.panel-title Entrainements précédents
       .panel-body
         %table.table.table-bordered.table-condensed.table-hover
-          = render partial: 'matches/next_match_coach', collection: @next_matches
-        .text-center
-          - ids = @next_matches.compact.map(&:id)
+          = render partial: 'trainings/previous', collection: @previous_trainings
 
   .col-md-12
     .panel.panel-default

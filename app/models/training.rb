@@ -4,6 +4,7 @@ class Training < ActiveRecord::Base
 
   scope :nexts, -> { where('date < ?', 7.days.from_now).where('date > ?', Time.now) }
   scope :passed, -> { where('date < ?', Time.now) }
+  scope :previous, -> { where('date > ?', 15.days.ago).where('date < ?', Time.now).order('date ASC') }
 
   def available_players
     training_availabilities.includes(:user).where(available: true).map(&:user)
@@ -26,6 +27,10 @@ class Training < ActiveRecord::Base
     User.all.map{ |u| UserMailer.delay.notify_user_for_training_cancelation(self, u) }.count
   end
   handle_asynchronously :notify_users_for_cancelation
+
+  def to_s
+    "Entrainement du #{date.to_s(:long)}"
+  end
 
   class << self
     def ask_for_availability(training_ids)

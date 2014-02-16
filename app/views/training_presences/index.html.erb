@@ -1,0 +1,30 @@
+<h1>Listing training_presences</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Joueur</th>
+      <th>Présent</th>
+      <th>Retard annoncé</th>
+      <th>Retard non annoncé</th>
+      <th>Absent non annoncé</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @training_presences.each do |training_presence| %>
+      <tr>
+        <td><%= training_presence.training %></td>
+        <td><%= training_presence.user %></td>
+        <td><%= training_presence.status %></td>
+        <td><%= link_to 'Show', training_presence %></td>
+        <td><%= link_to 'Edit', edit_training_presence_path(training_presence) %></td>
+        <td><%= link_to 'Destroy', training_presence, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Training presence', new_training_presence_path %>

@@ -11,6 +11,10 @@ class Club < ActiveRecord::Base
     Training.nexts
   end
 
+  def previous_trainings
+    Training.previous
+  end
+
   def next_matches
     match_day = MatchDay.next
     teams.map{ |t| t.match_on(match_day) }
