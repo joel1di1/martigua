@@ -7,12 +7,20 @@ class TrainingPresencesController < InheritedResources::Base
 
   def create
     @training = Training.find params[:training_id]
+    users = []
     params[:users].each do |key, value|
       user = User.find key
+      users << user
       training_presence = TrainingPresence.find_or_create_by user: user, training: @training
       training_presence.update_attribute :status, value
     end
+    missing_players = User.active - users
+    missing_players.each do |user|
+      training_presence = TrainingPresence.find_or_create_by user: user, training: @training
+      training_presence.update_attribute :status, 5      
+    end
     flash[:notice] = 'Présences mises à jour !'
+
     redirect_to edit_training_training_presences_path(training_id: @training.id)
   end
 
