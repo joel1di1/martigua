@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @score_event.user %>
+</p>
+
+<p>
+  <strong>Label:</strong>
+  <%= @score_event.label %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @score_event.value %>
+</p>
+
+<p>
+  <strong>Training presence:</strong>
+  <%= @score_event.training_presence %>
+</p>
+
+<%= link_to 'Edit', edit_score_event_path(@score_event) %> |
+<%= link_to 'Back', score_events_path %>

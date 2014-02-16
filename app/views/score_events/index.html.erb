@@ -1,0 +1,33 @@
+<h1>Listing score_events</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Label</th>
+      <th>Value</th>
+      <th>Training presence</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @score_events.each do |score_event| %>
+      <tr>
+        <td><%= score_event.user %></td>
+        <td><%= score_event.label %></td>
+        <td><%= score_event.value %></td>
+        <td><%= score_event.training_presence %></td>
+        <td><%= link_to 'Show', score_event %></td>
+        <td><%= link_to 'Edit', edit_score_event_path(score_event) %></td>
+        <td><%= link_to 'Destroy', score_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Score event', new_score_event_path %>

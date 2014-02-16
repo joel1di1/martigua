@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140216143238) do
+ActiveRecord::Schema.define(version: 20140216163255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -135,6 +135,18 @@ ActiveRecord::Schema.define(version: 20140216143238) do
   add_index "matches", ["championship_id"], name: "index_matches_on_championship_id", using: :btree
   add_index "matches", ["location_id"], name: "index_matches_on_location_id", using: :btree
   add_index "matches", ["match_day_id"], name: "index_matches_on_match_day_id", using: :btree
+
+  create_table "score_events", force: true do |t|
+    t.integer  "user_id"
+    t.string   "label"
+    t.integer  "value"
+    t.integer  "training_presence_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "score_events", ["training_presence_id"], name: "index_score_events_on_training_presence_id", using: :btree
+  add_index "score_events", ["user_id"], name: "index_score_events_on_user_id", using: :btree
 
   create_table "selections", force: true do |t|
     t.integer  "match_id",   null: false

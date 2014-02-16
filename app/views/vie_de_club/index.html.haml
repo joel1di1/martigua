@@ -1,0 +1,18 @@
+- if current_user.is_coach?
+  = link_to 'Ajouter un événement', new_score_event_path
+
+%h1 Leaderboard
+%ul
+  - index = 1
+  - position = index
+  - last_score = 999999
+  - @users.each do |user|
+    - if last_score > user.score
+      - position = index
+    - last_score = user.score
+    - index += 1  
+    %li
+      = position
+      = user.full_name
+      = user.score
+

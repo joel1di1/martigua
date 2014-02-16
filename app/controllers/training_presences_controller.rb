@@ -16,8 +16,16 @@ class TrainingPresencesController < InheritedResources::Base
     end
     missing_players = User.active - users
     missing_players.each do |user|
-      training_presence = TrainingPresence.find_or_create_by user: user, training: @training
-      training_presence.update_attribute :status, 5      
+      availability = user.training_availability_for(@training)
+      value = availability.try(:available) == false ? 5 : 4
+
+      training_presence = TrainingPresence.where(user: user, training: @training).first
+      if training_presence
+        training_presence.update_attribute :status, value 
+      else
+        TrainingPresence.create(user: user, training: @training, status: value)
+      end
+      
     end
     flash[:notice] = 'Présences mises à jour !'
 

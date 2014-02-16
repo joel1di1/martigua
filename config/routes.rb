@@ -1,5 +1,7 @@
 Martigua::Application.routes.draw do
   
+  resources :score_events
+
   resources :training_presences
 
   resources :invitations, only: [:create]
@@ -59,6 +61,8 @@ Martigua::Application.routes.draw do
   resources :teams, only: [] do 
     resources :matches, only: [:index]
   end
+
+  get 'vie_de_club', to: 'vie_de_club#index'
 
   scope 'coach' do
     get '/', to: 'coach_home#index', as: 'coach_home'

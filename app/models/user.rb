@@ -117,6 +117,10 @@ class User < ActiveRecord::Base
     matches.select{ |match| availabilities.where(match_id: match.id).exists? }
   end
 
+  def score
+    @score ||= ScoreEvent.where(user: self).sum(:value)
+  end
+
   protected 
 
     def ensure_authentication_token
