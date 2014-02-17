@@ -8,12 +8,28 @@
       %br
       Tel:
       = @user.phone
-
-.panel.panel-default
-  .panel-body
     %ul
       %li Certificat médical : #{t(@user.certificat_medical.to_s)}  
       %li Cotisation payée : #{t(@user.cotisation.to_s)}
-
 - if current_user == @user
   = link_to 'Modifier', edit_user_path(@user)
+
+.panel.panel-default
+  .panel-heading
+    .panel-title  
+      Score "vie de club" : 
+      %strong= @user.score
+  .panel-body
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Score
+          %th Evénement
+      %tbody
+        - @user.score_events.each do |score_event|
+          %tr
+            %td= score_event.value
+            %td= score_event.label
+
+
+

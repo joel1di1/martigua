@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :availabilities, dependent: :delete_all
   has_many :training_availabilities, dependent: :delete_all
+  has_many :score_events, dependent: :delete_all
   
   has_and_belongs_to_many :selections
 

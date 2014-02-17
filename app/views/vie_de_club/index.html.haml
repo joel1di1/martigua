@@ -1,18 +1,30 @@
 - if current_user.is_coach?
   = link_to 'Ajouter un événement', new_score_event_path
 
-%h1 Leaderboard
-%ul
-  - index = 1
-  - position = index
-  - last_score = 999999
-  - @users.each do |user|
-    - if last_score > user.score
-      - position = index
-    - last_score = user.score
-    - index += 1  
-    %li
-      = position
-      = user.full_name
-      = user.score
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        .panel-title Leaderboard
+      .panel-body
+        %table.table.table-striped
+          %thead
+            %tr
+              %th Classement
+              %th Joueur
+              %th Score
+          %tbody
+          - index = 1
+          - position = index
+          - last_score = 999999
+          - @users.each do |user|
+            - if last_score > user.score
+              - position = index
+            - last_score = user.score
+            - index += 1  
+            %tr
+              %td= position
+              %td
+                = link_to user.full_name, user
+              %td= user.score
 
