@@ -16,7 +16,7 @@ class Club < ActiveRecord::Base
   end
 
   def next_matches
-    match_day = MatchDay.next
+    match_day = MatchDay.where('end_date >= ?', Date.today).order('end_date ASC').first
     if match_day
       teams.map{ |t| t.match_on(match_day) }
     else
