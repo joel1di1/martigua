@@ -17,7 +17,11 @@ class Club < ActiveRecord::Base
 
   def next_matches
     match_day = MatchDay.next
-    teams.map{ |t| t.match_on(match_day) }
+    if match_day
+      teams.map{ |t| t.match_on(match_day) }
+    else
+      teams.map { |t| nil }
+    end
   end
 
 end
